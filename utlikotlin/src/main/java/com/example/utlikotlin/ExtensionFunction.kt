@@ -304,6 +304,10 @@ fun Fragment.showSnackbar(text: String) {
     Snackbar.make(view, text, Snackbar.LENGTH_SHORT).show()
 }
 
+fun Fragment.setTitle(title: String) {
+    (requireActivity() as AppCompatActivity).supportActionBar?.title = title
+}
+
 fun Fragment.pickPhoto(request: ActivityResultLauncher<Intent>) {
     val intent = Intent(Intent.ACTION_PICK).apply {
         type = "image/*"
