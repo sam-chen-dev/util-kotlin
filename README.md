@@ -1,5 +1,5 @@
 # util-kotlin
-Utility functions in Kotlin.
+Utility classed and functions for Android and Kotlin.
 
 **API Level: 26+**
 
