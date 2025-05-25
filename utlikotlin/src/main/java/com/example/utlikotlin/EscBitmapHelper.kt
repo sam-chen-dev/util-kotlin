@@ -3,6 +3,7 @@ package com.example.utlikotlin
 import android.graphics.Bitmap
 import android.util.Log
 import java.util.*
+import androidx.core.graphics.get
 
 object EscBitmapHelper {
     private const val HEX_STRING = "0123456789ABCDEF"
@@ -29,7 +30,7 @@ object EscBitmapHelper {
             buffer = StringBuffer()
 
             for (j in 0 until bWidth) {
-                val color = bmp.getPixel(j, i)
+                val color = bmp[j, i]
                 val r = color shr 16 and 0xff
                 val g = color shr 8 and 0xff
                 val b = color and 0xff
