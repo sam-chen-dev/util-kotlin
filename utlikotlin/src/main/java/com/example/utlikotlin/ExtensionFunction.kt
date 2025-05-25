@@ -16,7 +16,9 @@ import android.graphics.BitmapFactory
 import android.graphics.Rect
 import android.location.LocationManager
 import android.net.ConnectivityManager
+import android.net.InetAddresses
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -35,6 +37,7 @@ import android.widget.*
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -108,7 +111,8 @@ fun String.toMediaType(): MediaType = MediaType.get(this)
 
 fun String.isEmailAddress() = Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
-fun String.isIpAddress() = Patterns.IP_ADDRESS.matcher(this).matches()
+@RequiresApi(Build.VERSION_CODES.Q)
+fun String.isIpAddress() = InetAddresses.isNumericAddress(this)
 
 fun String.toEncryptedString(): String = Base64.encodeToString(this.toByteArray(), Base64.NO_PADDING)
 
@@ -394,8 +398,7 @@ fun Fragment.openAssetsFile(fileName: String) {
     val fileUri = FileProvider.getUriForFile(requireContext(), "${requireContext().packageName}.provider", file)
 
     val intent = Intent(Intent.ACTION_VIEW).apply {
-        type = "application/${file.extension}"
-        data = fileUri
+        setDataAndType(fileUri, "application/${file.extension}")
 
         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     }
@@ -667,9 +670,16 @@ fun DownloadManager.getDownloadedFile(id: Long): DownloadedFile {
 
     cursor.use {
         if (it.moveToFirst()) {
-            url = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_URI))
+            val uriColumnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_URI)
+            val statusColumnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
 
-            val statusIndex = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
+            if (uriColumnIndex < 0 || statusColumnIndex < 0) {
+                return@use
+            }
+
+            url = cursor.getString(uriColumnIndex)
+
+            val statusIndex = cursor.getInt(statusColumnIndex)
 
             status = when (statusIndex) {
                 DownloadManager.STATUS_SUCCESSFUL -> DownloadStatus.SUCCESSFUL
