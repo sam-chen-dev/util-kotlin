@@ -95,6 +95,11 @@ fun setData(autoCompleteTextView: AutoCompleteTextView, words: List<String>) {
     autoCompleteTextView.setAdapter(adapter)
 }
 
+@BindingAdapter("text")
+fun setText(autoCompleteTextView: AutoCompleteTextView, text: String) {
+    autoCompleteTextView.setText(text, false)
+}
+
 @BindingAdapter("data")
 fun <T> setData(recyclerView: RecyclerView, data: List<T>?) {
     (recyclerView.adapter as ListAdapter<T, RecyclerView.ViewHolder>).submitList(data)
