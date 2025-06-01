@@ -65,7 +65,6 @@ import com.google.android.material.timepicker.TimeFormat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
 import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
@@ -106,8 +105,6 @@ fun Double.roundDecimal(digit: Int) = "%,.${digit}f".format(this)
 fun Float.roundDecimal(digit: Int) = "%,.${digit}f".format(this)
 
 fun String.toBytes() = this.toByteArray(Charset.forName("GBK"))
-
-fun String.toMediaType(): MediaType = MediaType.get(this)
 
 fun String.isEmailAddress() = Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
@@ -641,6 +638,15 @@ fun AndroidViewModel.getRawUris(arrayResId: Int): List<Uri> {
     raws.recycle()
 
     return rawUris
+}
+
+suspend fun AndroidViewModel.readFileFromAssets(path: String): String? {
+    try {
+        return getAssets().open(path).bufferedReader().use { it.readText() }
+    } catch (e: Exception) {
+        Log.v("readFileFromAssets()", "Error: [${e.javaClass.simpleName}]: ${e.message.toString()}")
+        return null
+    }
 }
 
 fun <T> MutableSharedFlow<T>.emit(coroutineScope: CoroutineScope, value: T) = coroutineScope.launch {
