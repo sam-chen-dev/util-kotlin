@@ -7,7 +7,7 @@ import java.time.LocalTime
 object DateTimeHelper {
     fun nowInSystemMillis() = LocalDateTime.now().toSystemMillis()
 
-    fun nowInFormattedString(format: String) = nowInSystemMillis().toFormattedString(format)
+    fun nowInFormattedString(format: String) = nowInSystemMillis().toFormattedDateTimeString(format)
 
     fun todayStartInSystemMillis() = LocalDateTime.now().with(LocalTime.MIN).toSystemMillis()
 
