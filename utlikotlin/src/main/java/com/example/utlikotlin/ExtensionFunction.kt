@@ -21,7 +21,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.PowerManager
 import android.provider.MediaStore
+import android.provider.Settings
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
@@ -283,6 +285,8 @@ fun Fragment.getConnectivityManager() = requireContext().getSystemService(Contex
 
 fun Fragment.getNotificationManager() = requireContext().getSystemService(NotificationManager::class.java) as NotificationManager
 
+fun Fragment.getPowerManager() = requireContext().getSystemService(Context.POWER_SERVICE) as PowerManager
+
 fun Fragment.getFragmentById(id: Int) = childFragmentManager.findFragmentById(id)
 
 fun Fragment.getMapFragmentById(id: Int) = childFragmentManager.findFragmentById(id) as SupportMapFragment
@@ -354,6 +358,18 @@ fun Fragment.requestGPSOn(request: ActivityResultLauncher<IntentSenderRequest>) 
 
         request.launch(intentSenderRequest)
     }
+}
+
+fun Fragment.isIgnoreBatteryOptimizationPermissionGranted(): Boolean {
+    return getPowerManager().isIgnoringBatteryOptimizations(requireContext().packageName)
+}
+
+fun Fragment.requestIgnoreBatteryOptimizationPermission(request: ActivityResultLauncher<Intent>) {
+    val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {		//be careful of using this, see top
+        data = "package:${requireContext().packageName}".toUri()
+    }
+
+    request.launch(intent)
 }
 
 fun Fragment.requestPermissions(request: ActivityResultLauncher<Array<String>>, permissions: Array<String>) = request.launch(permissions)
