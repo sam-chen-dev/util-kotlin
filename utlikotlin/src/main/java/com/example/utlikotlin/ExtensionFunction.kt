@@ -195,9 +195,9 @@ fun ViewGroup.getCheckedIndexes(): List<Int> {
     return checkedIndexes
 }
 
-fun RecyclerView.smoothScrollToTop() = smoothScrollToPosition(0)
+fun RecyclerView.isAtTop() = !canScrollVertically(-1)
 
-fun RecyclerView.scrollToTop() = scrollToPosition(0)
+fun RecyclerView.scrollToTop() = smoothScrollToPosition(0)
 
 fun ImageView.load(url: String) {
     val uri = url.toUri().buildUpon().scheme("https").build()
