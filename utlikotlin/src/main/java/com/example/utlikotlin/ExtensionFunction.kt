@@ -39,6 +39,7 @@ import android.widget.*
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -364,12 +365,16 @@ fun Fragment.isIgnoreBatteryOptimizationPermissionGranted(): Boolean {
     return getPowerManager().isIgnoringBatteryOptimizations(requireContext().packageName)
 }
 
-fun Fragment.requestIgnoreBatteryOptimizationPermission(request: ActivityResultLauncher<Intent>) {
-    val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {		//be careful of using this, see top
+fun Fragment.requestIgnoreBatteryOptimizationPermission(resultHandler: () -> Unit) {
+    val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
         data = "package:${requireContext().packageName}".toUri()
     }
 
-    request.launch(intent)
+    val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        resultHandler()
+    }
+
+    activityResultLauncher.launch(intent)
 }
 
 fun Fragment.requestPermissions(request: ActivityResultLauncher<Array<String>>, permissions: Array<String>) = request.launch(permissions)
