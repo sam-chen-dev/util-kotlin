@@ -1,5 +1,6 @@
 package com.example.utlikotlin
 
+import android.Manifest
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.app.AlarmManager
@@ -375,6 +376,23 @@ fun Fragment.requestIgnoreBatteryOptimizationPermission(resultHandler: () -> Uni
     }
 
     activityResultLauncher.launch(intent)
+}
+
+fun Fragment.isCameraPermissionGranted(): Boolean {
+    return ContextCompat.checkSelfPermission(
+        requireContext(),
+        Manifest.permission.CAMERA
+    ) == PackageManager.PERMISSION_GRANTED
+}
+
+fun Fragment.requestCameraPermission(onResult: (Boolean) -> Unit) {
+    val activityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        onResult(isGranted)
+    }
+
+    activityResultLauncher.launch(Manifest.permission.CAMERA)
 }
 
 fun Fragment.requestPermissions(request: ActivityResultLauncher<Array<String>>, permissions: Array<String>) = request.launch(permissions)
