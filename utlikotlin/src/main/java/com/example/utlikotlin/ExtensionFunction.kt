@@ -388,7 +388,7 @@ fun Fragment.isCameraPermissionGranted(): Boolean {
     ) == PackageManager.PERMISSION_GRANTED
 }
 
-private fun Fragment.requestCameraPermission(launcher: ActivityResultLauncher<String>) {
+fun Fragment.requestCameraPermission(launcher: ActivityResultLauncher<String>) {
     launcher.launch(Manifest.permission.CAMERA)
 }
 
