@@ -366,13 +366,13 @@ fun Fragment.isIgnoreBatteryOptimizationPermissionGranted(): Boolean {
     return getPowerManager().isIgnoringBatteryOptimizations(requireContext().packageName)
 }
 
-fun Fragment.requestIgnoreBatteryOptimizationPermission(resultHandler: () -> Unit) {
+fun Fragment.requestIgnoreBatteryOptimizationPermission(onResult: (Boolean) -> Unit) {
     val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
         data = "package:${requireContext().packageName}".toUri()
     }
 
     val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        resultHandler()
+        onResult(isIgnoreBatteryOptimizationPermissionGranted())
     }
 
     activityResultLauncher.launch(intent)
