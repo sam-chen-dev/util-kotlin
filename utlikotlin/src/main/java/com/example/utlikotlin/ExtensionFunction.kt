@@ -36,6 +36,7 @@ import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.URLUtil
 import android.widget.*
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
@@ -110,10 +111,12 @@ fun Float.roundDecimal(digit: Int) = "%,.${digit}f".format(this)
 
 fun String.toBytes() = this.toByteArray(Charset.forName("GBK"))
 
-fun String.isEmailAddress() = Patterns.EMAIL_ADDRESS.matcher(this).matches()
+fun String.isValidEmailAddress() = Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
 @RequiresApi(Build.VERSION_CODES.Q)
-fun String.isIpAddress() = InetAddresses.isNumericAddress(this)
+fun String.isValidIpAddress() = InetAddresses.isNumericAddress(this)
+
+fun String.isValidUrl() = URLUtil.isValidUrl(this)
 
 fun String.toEncryptedString(): String = Base64.encodeToString(this.toByteArray(), Base64.NO_PADDING)
 
