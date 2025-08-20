@@ -388,14 +388,8 @@ fun Fragment.isCameraPermissionGranted(): Boolean {
     ) == PackageManager.PERMISSION_GRANTED
 }
 
-fun Fragment.requestCameraPermission(onResult: (Boolean) -> Unit) {
-    val activityResultLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        onResult(isGranted)
-    }
-
-    activityResultLauncher.launch(Manifest.permission.CAMERA)
+private fun Fragment.requestCameraPermission(launcher: ActivityResultLauncher<String>) {
+    launcher.launch(Manifest.permission.CAMERA)
 }
 
 fun Fragment.requestPermissions(request: ActivityResultLauncher<Array<String>>, permissions: Array<String>) = request.launch(permissions)
