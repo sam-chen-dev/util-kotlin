@@ -526,7 +526,7 @@ fun Fragment.setFragmentResult(requestKeyResId: Int, result: Bundle) {
 }
 
 fun Fragment.setFragmentResultListener(requestKeyResId: Int, listener: (String, Bundle) -> Unit) {
-    parentFragmentManager.setFragmentResultListener(getString(requestKeyResId), this, listener)
+    parentFragmentManager.setFragmentResultListener(getString(requestKeyResId), viewLifecycleOwner, listener)
 }
 
 fun Fragment.setActionBar(toolbar: MaterialToolbar) {
