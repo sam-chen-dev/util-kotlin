@@ -8,7 +8,7 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 
-object QRCode {
+object QrCode {
     fun generate(text: String, width: Int, height: Int): Bitmap {
         val encodedText = String(text.toByteArray(Charsets.UTF_8), Charsets.ISO_8859_1)
 

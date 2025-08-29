@@ -337,13 +337,13 @@ fun Fragment.takeAndSavePicture(requestCode: Int, imageUri: Uri) {
     startActivityForResult(intent, requestCode)
 }
 
-fun Fragment.isGPSOn(): Boolean {
+fun Fragment.isGpsOn(): Boolean {
     val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
     return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 }
 
-fun Fragment.requestGPSOn(request: ActivityResultLauncher<IntentSenderRequest>) {
+fun Fragment.requestGpsOn(request: ActivityResultLauncher<IntentSenderRequest>) {
     val locationRequest = LocationRequest.create().apply {
         priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
     }
