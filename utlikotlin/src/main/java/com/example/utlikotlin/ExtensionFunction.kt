@@ -313,12 +313,12 @@ fun Fragment.setTitle(title: String) {
     (requireActivity() as AppCompatActivity).supportActionBar?.title = title
 }
 
-fun Fragment.pickPhoto(request: ActivityResultLauncher<Intent>) {
+fun Fragment.pickPhoto(launcher: ActivityResultLauncher<Intent>) {
     val intent = Intent(Intent.ACTION_PICK).apply {
         type = "image/*"
     }
 
-    request.launch(intent)
+    launcher.launch(intent)
 }
 
 fun Fragment.pickAndSavePhoto(requestCode: Int) {
