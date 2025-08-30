@@ -1,6 +1,7 @@
 package com.example.utlikotlin
 
 import android.content.Context
+import android.net.Uri
 import android.util.Size
 import androidx.annotation.OptIn
 import androidx.camera.core.Camera
@@ -51,6 +52,22 @@ class QrCodeScanner {
         }
 
         cameraProviderFuture.addListener(listener, executor)
+    }
+
+    fun scanLocalImage(context: Context, uri: Uri, onResult: (String?) -> Unit) {
+        val inputImage = InputImage.fromFilePath(context, uri)
+
+        barcodeScanner.process(inputImage).apply {
+            addOnSuccessListener { barcodes ->
+                if (barcodes.isEmpty()) {
+                    onResult(null)
+                } else {
+                    barcodes.forEach { barcode ->
+                        onResult(barcode.rawValue)
+                    }
+                }
+            }
+        }
     }
 
     fun shutdown() {
