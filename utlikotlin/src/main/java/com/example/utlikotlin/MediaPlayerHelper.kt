@@ -3,12 +3,12 @@ package com.example.utlikotlin
 import android.content.Context
 import android.media.MediaPlayer
 
-class MediaPlayerHelper(private val context: Context) {
+class MediaPlayerHelper {
     private var mediaPlayer: MediaPlayer? = null
 
-    fun playOrPauseAudio(file: Any, isOverlaid: Boolean, isPauseReset: Boolean) {
+    fun playOrPauseAudio(context: Context, file: Any, isOverlaid: Boolean, isPauseReset: Boolean = true) {
         if (mediaPlayer == null || isOverlaid) {
-            mediaPlayer = getMediaPlayer(file, isOverlaid)
+            mediaPlayer = createMediaPlayer(context, file, isOverlaid)
 
             mediaPlayer!!.prepare()
             mediaPlayer!!.start()
@@ -31,7 +31,7 @@ class MediaPlayerHelper(private val context: Context) {
         mediaPlayer = null
     }
 
-    private fun getMediaPlayer(file: Any, isOverlaid: Boolean) = MediaPlayer().apply {
+    private fun createMediaPlayer(context: Context, file: Any, isOverlaid: Boolean) = MediaPlayer().apply {
         when (file) {
             is String -> context.assets.openFd(file).use {
                 setDataSource(it.fileDescriptor, it.startOffset, it.length)
