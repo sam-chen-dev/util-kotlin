@@ -214,6 +214,8 @@ fun ImageView.load(url: String) {
 
 fun ImageView.load(uri: Uri) = Glide.with(context).load(uri).into(this)
 
+fun ImageView.loadGif(resId: Int) = Glide.with(context).asGif().load(resId).into(this)
+
 fun ImageView.copy(xOffset: Int, yOffSet: Int): ImageView {
     val currentImageView = this
     val newImageView = ImageView(context).apply {
