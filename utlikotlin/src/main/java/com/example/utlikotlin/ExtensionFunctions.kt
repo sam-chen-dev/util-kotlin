@@ -267,6 +267,16 @@ fun TextInputEditText.focusOnLast() {
     setSelection(text.toString().length)
 }
 
+fun EditText.enableScroll() = setOnTouchListener { view, event ->
+    view.parent.requestDisallowInterceptTouchEvent(true)
+
+    if (event.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_UP) {
+        view.parent.requestDisallowInterceptTouchEvent(false)
+    }
+
+    false
+}
+
 fun AlertDialog.showIfNotShowing() {
     if (!isShowing) {
         show()
