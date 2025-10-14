@@ -6,6 +6,8 @@ import android.animation.PropertyValuesHolder
 import android.app.AlarmManager
 import android.app.DownloadManager
 import android.app.NotificationManager
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -640,6 +642,13 @@ fun Fragment.getClickableSpan(colorResId: Int, isUnderLined: Boolean, action: ()
 
 fun Fragment.getSpannableString(stringResId: Int, span: Any, start: Int, end: Int) = SpannableString(getString(stringResId)).apply {
     setSpan(span, start, end + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+}
+
+fun Fragment.copyToClipboard(label: String, text: String) {
+    val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clipData = ClipData.newPlainText(label, text)
+
+    clipboardManager.setPrimaryClip(clipData)
 }
 
 fun LifecycleOwner.isConfigChanging() = (this as Fragment).requireActivity().isChangingConfigurations
