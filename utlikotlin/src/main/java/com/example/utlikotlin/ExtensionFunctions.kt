@@ -279,6 +279,12 @@ fun EditText.enableScroll() = setOnTouchListener { view, event ->
     false
 }
 
+fun AutoCompleteTextView.setData(data: List<String>) {
+    val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, data)
+
+    setAdapter(adapter)
+}
+
 fun AlertDialog.showIfNotShowing() {
     if (!isShowing) {
         show()
@@ -395,10 +401,9 @@ fun Fragment.requestIgnoreBatteryOptimizationPermission(launcher: ActivityResult
 }
 
 fun Fragment.isCameraPermissionGranted(): Boolean {
-    return ContextCompat.checkSelfPermission(
-        requireContext(),
-        Manifest.permission.CAMERA
-    ) == PackageManager.PERMISSION_GRANTED
+    val result = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+
+    return result == PackageManager.PERMISSION_GRANTED
 }
 
 fun Fragment.requestCameraPermission(launcher: ActivityResultLauncher<String>) {
