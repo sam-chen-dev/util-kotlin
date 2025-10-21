@@ -307,6 +307,8 @@ fun AppCompatActivity.getNavHostFragmentById(id: Int) = supportFragmentManager.f
 
 fun AppCompatActivity.hideActionBar() = supportActionBar?.hide()
 
+fun AppCompatActivity.showActionBar() = supportActionBar?.show()
+
 fun Fragment.hideUpButton() = (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
 fun Fragment.getConnectivityManager() = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
