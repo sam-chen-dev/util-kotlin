@@ -34,6 +34,7 @@ import android.text.style.ClickableSpan
 import android.util.Base64
 import android.util.Log
 import android.util.Patterns
+import android.util.SparseBooleanArray
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
@@ -50,6 +51,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import androidx.core.util.forEach
 import androidx.core.view.forEachIndexed
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
@@ -159,12 +161,22 @@ fun Uri.toBitmap(context: Context): Bitmap? {
 
 fun <T> List<T>.range(fromIndex: Int, toIndex: Int) = this.subList(fromIndex, toIndex + 1)
 
-fun <T> List<T>.mapButReplace(targetItem: T, newItem: T) = map {
+fun <T> List<T>.replace(targetItem: T, newItem: T) = map {
     if (it == targetItem) {
         newItem
     } else {
         it
     }
+}
+
+fun SparseBooleanArray.toIndexes(): List<Int> {
+    val indexes = mutableListOf<Int>()
+
+    forEach { key, value ->
+        indexes.add(key)
+    }
+
+    return indexes
 }
 
 fun View.indexOfParent() = (this.parent as ViewGroup).indexOfChild(this)
