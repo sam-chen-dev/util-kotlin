@@ -56,6 +56,7 @@ import androidx.core.view.forEachIndexed
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.gms.common.api.ResolvableApiException
@@ -219,6 +220,8 @@ fun RecyclerView.isAtBottom() = !canScrollVertically(1)
 fun RecyclerView.scrollToTop() = smoothScrollToPosition(0)
 
 fun RecyclerView.scrollToBottom() = adapter?.let { smoothScrollToPosition(it.itemCount - 1) }
+
+fun RecyclerView.showDivider() = addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
 fun ImageView.load(url: String) {
     val uri = url.toUri().buildUpon().scheme("https").build()
