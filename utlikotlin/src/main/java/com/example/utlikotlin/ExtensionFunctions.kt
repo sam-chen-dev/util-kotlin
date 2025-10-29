@@ -427,6 +427,16 @@ fun Fragment.requestCameraPermission(launcher: ActivityResultLauncher<String>) {
     launcher.launch(Manifest.permission.CAMERA)
 }
 
+fun Fragment.isNotificationPermissionGranted(): Boolean {
+    val result = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS)
+
+    return result == PackageManager.PERMISSION_GRANTED
+}
+
+fun Fragment.requestNotificationPermission(launcher: ActivityResultLauncher<String>) {
+    launcher.launch(Manifest.permission.POST_NOTIFICATIONS)
+}
+
 fun Fragment.requestPermissions(request: ActivityResultLauncher<Array<String>>, permissions: Array<String>) = request.launch(permissions)
 
 fun Fragment.isAllPermissionsGranted(permissions: Array<String>) = permissions.all {
