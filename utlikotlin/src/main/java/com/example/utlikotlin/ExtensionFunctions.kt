@@ -335,7 +335,7 @@ fun AppCompatActivity.disableEdgeToEdge(contentView: View) {
 
         view.setPadding(0, systemBarInsets.top, 0, systemBarInsets.bottom)
 
-        insets
+        WindowInsetsCompat.CONSUMED
     }
 }
 
