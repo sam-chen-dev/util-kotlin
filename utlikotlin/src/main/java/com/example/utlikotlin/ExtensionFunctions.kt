@@ -52,6 +52,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.core.util.forEach
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.forEachIndexed
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
@@ -323,6 +326,19 @@ fun AppCompatActivity.getNavHostFragmentById(id: Int) = supportFragmentManager.f
 fun AppCompatActivity.hideActionBar() = supportActionBar?.hide()
 
 fun AppCompatActivity.showActionBar() = supportActionBar?.show()
+
+fun AppCompatActivity.disableEdgeToEdge(contentView: View) {
+    WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
+
+    ViewCompat.setOnApplyWindowInsetsListener(contentView) { view, insets ->
+        val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
+        val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+        view.setPadding(0, statusBarInsets.top, 0, systemBarInsets.bottom)
+
+        insets
+    }
+}
 
 fun Fragment.hideUpButton() = (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
