@@ -331,10 +331,9 @@ fun AppCompatActivity.disableEdgeToEdge(contentView: View) {
     WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
 
     ViewCompat.setOnApplyWindowInsetsListener(contentView) { view, insets ->
-        val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
         val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
 
-        view.setPadding(0, statusBarInsets.top, 0, systemBarInsets.bottom)
+        view.setPadding(0, systemBarInsets.top, 0, systemBarInsets.bottom)
 
         insets
     }
