@@ -56,6 +56,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.forEachIndexed
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.navigation.fragment.NavHostFragment
@@ -327,13 +328,24 @@ fun AppCompatActivity.hideActionBar() = supportActionBar?.hide()
 
 fun AppCompatActivity.showActionBar() = supportActionBar?.show()
 
-fun AppCompatActivity.disableEdgeToEdge(contentView: View) {
-    WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
+fun AppCompatActivity.disableEdgeToEdge(
+    contentView: View,
+    statusBarBackgroundView: View? = null,
+    isDarkActionBar: Boolean = false,
+) {
+    WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = !isDarkActionBar
 
     ViewCompat.setOnApplyWindowInsetsListener(contentView) { view, insets ->
         val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+        val topPadding = if (statusBarBackgroundView == null) systemBarInsets.top else 0
 
-        view.setPadding(0, systemBarInsets.top, 0, systemBarInsets.bottom)
+        view.setPadding(0, topPadding, 0, systemBarInsets.bottom)
+
+        statusBarBackgroundView?.let {
+            it.updateLayoutParams {
+                height = systemBarInsets.top
+            }
+        }
 
         WindowInsetsCompat.CONSUMED
     }
