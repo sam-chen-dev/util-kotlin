@@ -341,10 +341,8 @@ fun AppCompatActivity.disableEdgeToEdge(
 
         view.setPadding(0, topPadding, 0, systemBarInsets.bottom)
 
-        statusBarBackgroundView?.let {
-            it.updateLayoutParams {
-                height = systemBarInsets.top
-            }
+        statusBarBackgroundView?.updateLayoutParams {
+            height = systemBarInsets.top
         }
 
         WindowInsetsCompat.CONSUMED
