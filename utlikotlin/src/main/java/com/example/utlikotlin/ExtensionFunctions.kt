@@ -62,6 +62,7 @@ import androidx.lifecycle.*
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
@@ -309,6 +310,8 @@ fun AlertDialog.showIfNotShowing() {
         show()
     }
 }
+
+fun ViewPager2.goToNextPage() = currentItem++
 
 fun Context.getConnectivityManager() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
