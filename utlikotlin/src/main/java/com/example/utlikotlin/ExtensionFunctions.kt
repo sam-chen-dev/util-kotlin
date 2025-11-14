@@ -70,6 +70,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
@@ -282,6 +283,8 @@ fun ImageButton.setEnableWithEffect(isEnable: Boolean) {
         imageAlpha = 0x3F
     }
 }
+
+fun Button.setIconResource(resId: Int) = (this as MaterialButton).setIconResource(resId)
 
 fun TextInputEditText.focusOnLast() {
     requestFocus()
