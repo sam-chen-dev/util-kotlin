@@ -16,6 +16,7 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.Rect
 import android.location.LocationManager
 import android.net.ConnectivityManager
@@ -41,7 +42,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.URLUtil
 import android.widget.*
+import androidx.activity.SystemBarStyle
 import androidx.activity.addCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.annotation.RequiresApi
@@ -337,18 +340,31 @@ fun AppCompatActivity.showActionBar() = supportActionBar?.show()
 fun AppCompatActivity.disableEdgeToEdge(
     contentView: View,
     statusBarBackgroundView: View? = null,
-    isDarkActionBar: Boolean = false,
+    navigationBarBackgroundView: View? = null,
+    isDarkStatusBar: Boolean = false,
+    isDarkNavigationBar: Boolean = false
 ) {
-    WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = !isDarkActionBar
+    val lightSystemBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+    val darkSystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
+
+    val statusBarStyle = if (isDarkStatusBar) darkSystemBarStyle else lightSystemBarStyle
+    val navigationBarStyle = if (isDarkNavigationBar) darkSystemBarStyle else lightSystemBarStyle
+
+    enableEdgeToEdge(statusBarStyle, navigationBarStyle)
 
     ViewCompat.setOnApplyWindowInsetsListener(contentView) { view, insets ->
         val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
         val topPadding = if (statusBarBackgroundView == null) systemBarInsets.top else 0
+        val bottomPadding = if (navigationBarBackgroundView == null) systemBarInsets.bottom else 0
 
-        view.setPadding(0, topPadding, 0, systemBarInsets.bottom)
+        view.setPadding(0, topPadding, 0, bottomPadding)
 
         statusBarBackgroundView?.updateLayoutParams {
             height = systemBarInsets.top
+        }
+
+        navigationBarBackgroundView?.updateLayoutParams {
+            height = systemBarInsets.bottom
         }
 
         WindowInsetsCompat.CONSUMED
