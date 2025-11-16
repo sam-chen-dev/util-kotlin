@@ -191,6 +191,32 @@ fun SparseBooleanArray.toIndexes(): List<Int> {
 
 fun View.indexOfParent() = (this.parent as ViewGroup).indexOfChild(this)
 
+fun View.next(): View {
+    val currentIndex = (this.parent as ViewGroup).indexOfChild(this)
+    val nextIndex = currentIndex + 1
+
+    return (this.parent as ViewGroup).getChildAt(nextIndex)
+}
+
+fun View.previous(): View {
+    val currentIndex = (this.parent as ViewGroup).indexOfChild(this)
+    val previousIndex = currentIndex - 1
+
+    return (this.parent as ViewGroup).getChildAt(previousIndex)
+}
+
+fun View.isLast(): Boolean {
+    val currentIndex = (this.parent as ViewGroup).indexOfChild(this)
+
+    return currentIndex == (this.parent as ViewGroup).childCount - 1
+}
+
+fun View.isFirst(): Boolean {
+    val currentIndex = (this.parent as ViewGroup).indexOfChild(this)
+
+    return currentIndex == 0
+}
+
 fun View.scale(value: Float, duration: Long) {
     val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, value)
     val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, value)
