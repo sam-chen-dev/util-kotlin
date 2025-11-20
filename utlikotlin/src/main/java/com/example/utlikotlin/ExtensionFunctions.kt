@@ -51,6 +51,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
@@ -73,6 +74,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
@@ -234,6 +236,20 @@ fun View.isTouched(motionEvent: MotionEvent): Boolean {
     this.getGlobalVisibleRect(rect)
 
     return rect.contains(motionEvent.rawX.toInt(), motionEvent.rawY.toInt())
+}
+
+fun View.slideDown() {
+    val layoutParams = layoutParams as CoordinatorLayout.LayoutParams
+    val behavior = layoutParams.behavior as HideBottomViewOnScrollBehavior
+
+    behavior.slideDown(this)
+}
+
+fun View.slideUp() {
+    val layoutParams = layoutParams as CoordinatorLayout.LayoutParams
+    val behavior = layoutParams.behavior as HideBottomViewOnScrollBehavior
+
+    behavior.slideUp(this)
 }
 
 fun ViewGroup.getCheckedIndexes(): List<Int> {
