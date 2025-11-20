@@ -58,7 +58,6 @@ import androidx.core.net.toUri
 import androidx.core.util.forEach
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.forEachIndexed
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
@@ -379,7 +378,7 @@ fun AppCompatActivity.hideActionBar() = supportActionBar?.hide()
 
 fun AppCompatActivity.showActionBar() = supportActionBar?.show()
 
-fun AppCompatActivity.disableEdgeToEdge(
+fun AppCompatActivity.setupEdgeToEdge(
     contentView: View,
     statusBarBackgroundView: View? = null,
     navigationBarBackgroundView: View? = null,
