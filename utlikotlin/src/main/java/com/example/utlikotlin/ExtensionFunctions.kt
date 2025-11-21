@@ -806,6 +806,36 @@ fun Fragment.copyToClipboard(label: String, text: String) {
     clipboardManager.setPrimaryClip(clipData)
 }
 
+fun Fragment.setupEdgeToEdge(
+    contentView: View,
+    statusBarBackgroundView: View,
+    navigationBarBackgroundView: View,
+    isDarkStatusBar: Boolean,
+    isDarkNavigationBar: Boolean
+) {
+    val lightSystemBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+    val darkSystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
+
+    val statusBarStyle = if (isDarkStatusBar) darkSystemBarStyle else lightSystemBarStyle
+    val navigationBarStyle = if (isDarkNavigationBar) darkSystemBarStyle else lightSystemBarStyle
+
+    requireActivity().enableEdgeToEdge(statusBarStyle, navigationBarStyle)
+
+    ViewCompat.setOnApplyWindowInsetsListener(contentView) { view, insets ->
+        val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+        statusBarBackgroundView.updateLayoutParams {
+            height = systemBarInsets.top
+        }
+
+        navigationBarBackgroundView.updateLayoutParams {
+            height = systemBarInsets.bottom
+        }
+
+        WindowInsetsCompat.CONSUMED
+    }
+}
+
 fun LifecycleOwner.isConfigChanging() = (this as Fragment).requireActivity().isChangingConfigurations
 
 fun Intent.isResolvable(context: Context) = resolveActivity(context.packageManager) != null
