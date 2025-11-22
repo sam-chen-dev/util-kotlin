@@ -836,6 +836,16 @@ fun Fragment.setupEdgeToEdge(
     }
 }
 
+fun Fragment.setSystemBarsStyle(isDarkStatusBar: Boolean, isDarkNavigationBar: Boolean) {
+    val lightSystemBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+    val darkSystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
+
+    val statusBarStyle = if (isDarkStatusBar) darkSystemBarStyle else lightSystemBarStyle
+    val navigationBarStyle = if (isDarkNavigationBar) darkSystemBarStyle else lightSystemBarStyle
+
+    requireActivity().enableEdgeToEdge(statusBarStyle, navigationBarStyle)
+}
+
 fun LifecycleOwner.isConfigChanging() = (this as Fragment).requireActivity().isChangingConfigurations
 
 fun Intent.isResolvable(context: Context) = resolveActivity(context.packageManager) != null
