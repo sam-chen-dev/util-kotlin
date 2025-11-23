@@ -59,6 +59,7 @@ import androidx.core.util.forEach
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.forEachIndexed
+import androidx.core.view.get
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
@@ -74,6 +75,7 @@ import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
@@ -366,6 +368,10 @@ fun ViewPager2.setOnPageChangeListener(onChange: (Int) -> Unit) {
             onChange(position)
         }
     })
+}
+
+fun BottomNavigationView.setSelectedItemIndex(index: Int) {
+    selectedItemId = menu[index].itemId
 }
 
 fun Context.getConnectivityManager() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
