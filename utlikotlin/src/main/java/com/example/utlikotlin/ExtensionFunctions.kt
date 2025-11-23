@@ -360,6 +360,14 @@ fun AlertDialog.showIfNotShowing() {
 
 fun ViewPager2.goToNextPage() = currentItem++
 
+fun ViewPager2.setOnPageChangeListener(onChange: (Int) -> Unit) {
+    registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            onChange(position)
+        }
+    })
+}
+
 fun Context.getConnectivityManager() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
 fun Context.getNotificationManager() = getSystemService(NotificationManager::class.java) as NotificationManager
