@@ -58,6 +58,7 @@ import androidx.core.net.toUri
 import androidx.core.util.forEach
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.children
 import androidx.core.view.forEachIndexed
 import androidx.core.view.get
 import androidx.core.view.updateLayoutParams
@@ -372,6 +373,14 @@ fun ViewPager2.setOnPageChangeListener(onChange: (Int) -> Unit) {
 
 fun BottomNavigationView.setSelectedItemIndex(index: Int) {
     selectedItemId = menu[index].itemId
+}
+
+fun BottomNavigationView.setOnItemSelectListener(onSelect: (Int) -> Unit) {
+    setOnItemSelectedListener { item ->
+        onSelect(menu.children.indexOf(item))
+
+        true
+    }
 }
 
 fun Context.getConnectivityManager() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
