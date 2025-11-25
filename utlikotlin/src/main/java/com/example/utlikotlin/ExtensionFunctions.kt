@@ -63,6 +63,7 @@ import androidx.core.view.children
 import androidx.core.view.forEachIndexed
 import androidx.core.view.get
 import androidx.core.view.updateLayoutParams
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.navigation.fragment.NavHostFragment
@@ -790,6 +791,16 @@ fun Fragment.goHomeOnBackPressed() = requireActivity().onBackPressedDispatcher.a
     }
 
     startActivity(intent)
+}
+
+fun Fragment.closeDrawerOnBackPressed(drawer: DrawerLayout) {
+    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+        if (drawer.isOpen) {
+            drawer.close()
+        } else {
+            requireActivity().finish()
+        }
+    }
 }
 
 fun Fragment.getStatusBarHeight(): Int {
