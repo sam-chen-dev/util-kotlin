@@ -25,6 +25,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.Parcelable
 import android.os.PowerManager
 import android.provider.MediaStore
 import android.provider.Settings
@@ -275,6 +276,10 @@ fun RecyclerView.scrollToTop() = smoothScrollToPosition(0)
 fun RecyclerView.scrollToBottom() = adapter?.let { smoothScrollToPosition(it.itemCount - 1) }
 
 fun RecyclerView.showDivider() = addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
+fun RecyclerView.getState() = layoutManager?.onSaveInstanceState()
+
+fun RecyclerView.setState(state: Parcelable?) = layoutManager?.onRestoreInstanceState(state)
 
 fun ImageView.load(url: String) {
     val uri = url.toUri().buildUpon().scheme("https").build()
