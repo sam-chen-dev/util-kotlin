@@ -803,6 +803,16 @@ fun Fragment.closeDrawerOnBackPressed(drawer: DrawerLayout) {
     }
 }
 
+fun Fragment.goToPreviousPageOnBackPressed(viewPager: ViewPager2) {
+    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+        if (viewPager.currentItem != 0) {
+            viewPager.currentItem--
+        } else {
+            requireActivity().finish()
+        }
+    }
+}
+
 fun Fragment.getStatusBarHeight(): Int {
     val statusBarHeight = resources.getIdentifier("status_bar_height", "dimen", "android")
 
