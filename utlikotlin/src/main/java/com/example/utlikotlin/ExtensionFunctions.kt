@@ -4,6 +4,7 @@ import android.Manifest
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.app.AlarmManager
+import android.app.Dialog
 import android.app.DownloadManager
 import android.app.NotificationManager
 import android.content.ClipData
@@ -41,6 +42,7 @@ import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.webkit.URLUtil
 import android.widget.*
 import androidx.activity.SystemBarStyle
@@ -366,6 +368,11 @@ fun AlertDialog.showIfNotShowing() {
         show()
     }
 }
+
+fun Dialog.extendToBottomEdge() = window?.setFlags(
+    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+)
 
 fun ViewPager2.goToNextPage() = currentItem++
 
