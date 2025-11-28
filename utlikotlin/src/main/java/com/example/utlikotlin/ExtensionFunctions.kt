@@ -61,6 +61,7 @@ import androidx.core.net.toUri
 import androidx.core.util.forEach
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.children
 import androidx.core.view.forEachIndexed
 import androidx.core.view.get
@@ -369,8 +370,10 @@ fun AlertDialog.showIfNotShowing() {
     }
 }
 
-fun Dialog.extendToBottomEdge(navigationBarBackgroundView: View) {
-    window?.setFlags(
+fun Dialog.extendToBottomEdge(navigationBarBackgroundView: View, isDarkNavigationBar: Boolean) {
+    WindowInsetsControllerCompat(window!!, window!!.decorView).isAppearanceLightNavigationBars = !isDarkNavigationBar
+
+    window!!.setFlags(
         WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
         WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
     )
