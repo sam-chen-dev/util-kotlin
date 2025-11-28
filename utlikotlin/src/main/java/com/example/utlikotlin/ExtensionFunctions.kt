@@ -369,10 +369,29 @@ fun AlertDialog.showIfNotShowing() {
     }
 }
 
-fun Dialog.extendToBottomEdge() = window?.setFlags(
-    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-)
+fun Dialog.extendToBottomEdge(navigationBarBackgroundView: View) {
+    window?.setFlags(
+        WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+        WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+    )
+
+    setOnShowListener {
+        val bottomSheet = findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)!!
+
+        ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { view, insets ->
+            val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val keyboardInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+
+            navigationBarBackgroundView.updateLayoutParams {
+                height = systemBarInsets.bottom
+            }
+
+            view.setPadding(0, 0, 0, keyboardInsets.bottom)
+
+            WindowInsetsCompat.CONSUMED
+        }
+    }
+}
 
 fun ViewPager2.goToNextPage() = currentItem++
 
