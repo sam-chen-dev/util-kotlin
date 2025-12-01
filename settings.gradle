@@ -1,3 +1,2 @@
 include ':utlikotlin'
 include ':app'
-rootProject.name = "Util Kotlin"
