@@ -1,12 +1,15 @@
 package com.example.utlikotlin
 
 import android.content.Context
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.LocalActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 
 @Composable
 fun SetSystemBarsStyle(isDarkStatusBar: Boolean, isDarkNavigationBar: Boolean) {
@@ -17,6 +20,13 @@ fun SetSystemBarsStyle(isDarkStatusBar: Boolean, isDarkNavigationBar: Boolean) {
     val navigationBarStyle = if (isDarkNavigationBar) darkSystemBarStyle else lightSystemBarStyle
 
     (LocalActivity.current as ComponentActivity?)?.enableEdgeToEdge(statusBarStyle, navigationBarStyle)
+}
+
+@Composable
+fun SimpleButton(text: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
+    Button(onClick, modifier) {
+        Text(text)
+    }
 }
 
 fun showToast(context: Context, text: String) = Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
