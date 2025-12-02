@@ -13,7 +13,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 
 @Composable
 fun SetSystemBarsStyle(isDarkStatusBar: Boolean, isDarkNavigationBar: Boolean) {
@@ -31,6 +34,23 @@ fun SimpleButton(text: String, modifier: Modifier = Modifier, onClick: () -> Uni
     Button(onClick, modifier) {
         Text(text)
     }
+}
+
+@Composable
+fun PrimaryText(text: Any, fontSize: TextUnit, isBold: Boolean = false) {
+    val string = when (text) {
+        is String -> text
+
+        is Int -> stringResource(text)
+
+        else -> throw IllegalArgumentException()
+    }
+
+    Text(
+        text = string,
+        fontSize = fontSize,
+        fontWeight = if (isBold) FontWeight.Bold else FontWeight.Normal
+    )
 }
 
 @Composable
