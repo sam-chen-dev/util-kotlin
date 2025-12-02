@@ -370,7 +370,7 @@ fun AlertDialog.showIfNotShowing() {
     }
 }
 
-fun Dialog.extendToBottomEdge(navigationBarBackgroundView: View, isDarkNavigationBar: Boolean) {
+fun Dialog.extendToBottomEdge(isDarkNavigationBar: Boolean) {
     WindowInsetsControllerCompat(window!!, window!!.decorView).isAppearanceLightNavigationBars = !isDarkNavigationBar
 
     window!!.setFlags(
@@ -384,11 +384,7 @@ fun Dialog.extendToBottomEdge(navigationBarBackgroundView: View, isDarkNavigatio
         ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { view, insets ->
             val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             val keyboardInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
-            val bottomPadding = if (keyboardInsets.bottom != 0) keyboardInsets.bottom - systemBarInsets.bottom else 0
-
-            navigationBarBackgroundView.updateLayoutParams {
-                height = systemBarInsets.bottom
-            }
+            val bottomPadding = if (keyboardInsets.bottom == 0) systemBarInsets.bottom else keyboardInsets.bottom
 
             view.setPadding(0, 0, 0, bottomPadding)
 
