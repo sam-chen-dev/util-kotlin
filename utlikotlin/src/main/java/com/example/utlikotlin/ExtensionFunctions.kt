@@ -393,6 +393,10 @@ fun Dialog.extendToBottomEdge(isDarkNavigationBar: Boolean) {
     }
 }
 
+fun Dialog.setNavigationBarStyle(isDarkNavigationBar: Boolean) {
+    WindowInsetsControllerCompat(window!!, window!!.decorView).isAppearanceLightNavigationBars = !isDarkNavigationBar
+}
+
 fun ViewPager2.goToNextPage() = currentItem++
 
 fun ViewPager2.setOnPageChangeListener(onChange: (Int) -> Unit) {
