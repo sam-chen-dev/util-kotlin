@@ -84,6 +84,7 @@ import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputEditText
@@ -910,6 +911,39 @@ fun Fragment.setupEdgeToEdge(
         navigationBarBackgroundView.updateLayoutParams {
             height = systemBarInsets.bottom
         }
+
+        WindowInsetsCompat.CONSUMED
+    }
+}
+
+fun Fragment.setupEdgeToEdge(
+    contentView: View,
+    statusBarBackgroundView: View,
+    navigationBarBackgroundView: View,
+    navigationView: NavigationView,
+    isDarkStatusBar: Boolean,
+    isDarkNavigationBar: Boolean
+) {
+    val lightSystemBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+    val darkSystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
+
+    val statusBarStyle = if (isDarkStatusBar) darkSystemBarStyle else lightSystemBarStyle
+    val navigationBarStyle = if (isDarkNavigationBar) darkSystemBarStyle else lightSystemBarStyle
+
+    requireActivity().enableEdgeToEdge(statusBarStyle, navigationBarStyle)
+
+    ViewCompat.setOnApplyWindowInsetsListener(contentView) { view, insets ->
+        val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+        statusBarBackgroundView.updateLayoutParams {
+            height = systemBarInsets.top
+        }
+
+        navigationBarBackgroundView.updateLayoutParams {
+            height = systemBarInsets.bottom
+        }
+
+        navigationView.setPadding(0, systemBarInsets.top, 0, systemBarInsets.bottom)
 
         WindowInsetsCompat.CONSUMED
     }
