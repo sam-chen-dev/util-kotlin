@@ -940,41 +940,6 @@ fun Fragment.setupEdgeToEdge(
     }
 }
 
-fun Fragment.setupEdgeToEdge(
-    contentView: View,
-    statusBarBackgroundView: View,
-    topNavigationBarBackgroundView: View,
-    bottomNavigationBarBackgroundView: View,
-    isDarkStatusBar: Boolean,
-    isDarkNavigationBar: Boolean
-) {
-    val lightSystemBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
-    val darkSystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
-
-    val statusBarStyle = if (isDarkStatusBar) darkSystemBarStyle else lightSystemBarStyle
-    val navigationBarStyle = if (isDarkNavigationBar) darkSystemBarStyle else lightSystemBarStyle
-
-    requireActivity().enableEdgeToEdge(statusBarStyle, navigationBarStyle)
-
-    ViewCompat.setOnApplyWindowInsetsListener(contentView) { view, insets ->
-        val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-
-        statusBarBackgroundView.updateLayoutParams {
-            height = systemBarInsets.top
-        }
-
-        topNavigationBarBackgroundView.updateLayoutParams {
-            height = systemBarInsets.bottom
-        }
-
-        bottomNavigationBarBackgroundView.updateLayoutParams {
-            height = systemBarInsets.bottom
-        }
-
-        WindowInsetsCompat.CONSUMED
-    }
-}
-
 fun Fragment.setSystemBarsStyle(isDarkStatusBar: Boolean, isDarkNavigationBar: Boolean) {
     val lightSystemBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
     val darkSystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
