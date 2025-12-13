@@ -940,6 +940,30 @@ fun Fragment.setupEdgeToEdge(
     }
 }
 
+fun Fragment.setupEdgeToEdge(
+    contentView: View,
+    subContentView: View,
+    isDarkNavigationBar: Boolean
+) {
+    val lightSystemBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+    val darkSystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
+
+    val statusBarStyle = darkSystemBarStyle
+    val navigationBarStyle = if (isDarkNavigationBar) darkSystemBarStyle else lightSystemBarStyle
+
+    requireActivity().enableEdgeToEdge(statusBarStyle, navigationBarStyle)
+
+    ViewCompat.setOnApplyWindowInsetsListener(contentView) { view, insets ->
+        val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+        subContentView.setPadding(0, 0, 0, systemBarInsets.bottom)
+
+        view.setPadding(0, systemBarInsets.top, 0, 0)
+
+        WindowInsetsCompat.CONSUMED
+    }
+}
+
 fun Fragment.setSystemBarsStyle(isDarkStatusBar: Boolean, isDarkNavigationBar: Boolean) {
     val lightSystemBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
     val darkSystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
