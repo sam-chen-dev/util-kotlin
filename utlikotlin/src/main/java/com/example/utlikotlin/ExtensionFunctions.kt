@@ -749,20 +749,6 @@ fun Fragment.setReversePortraitMode() {
     requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT
 }
 
-fun Fragment.setFullScreenMode(isEnable: Boolean) {
-    if (isEnable) {
-        val systemUiFlag = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-
-        requireActivity().window.decorView.systemUiVisibility = systemUiFlag
-
-        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-    } else {
-        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
-
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
-    }
-}
-
 fun Fragment.setFragmentResult(requestKeyResId: Int, result: Bundle) {
     parentFragmentManager.setFragmentResult(getString(requestKeyResId), result)
 }
