@@ -720,6 +720,8 @@ fun Fragment.getRawUris(arrayResId: Int): List<Uri> {
     return rawUris
 }
 
+fun Fragment.isConfigChanging() = requireActivity().isChangingConfigurations
+
 fun Fragment.isLandscapeMode() = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
 fun Fragment.setLandscapeMode() {
@@ -965,8 +967,6 @@ fun Fragment.setSystemBarsStyle(isDarkStatusBar: Boolean, isDarkNavigationBar: B
 
     requireActivity().enableEdgeToEdge(statusBarStyle, navigationBarStyle)
 }
-
-fun LifecycleOwner.isConfigChanging() = (this as Fragment).requireActivity().isChangingConfigurations
 
 fun Intent.isResolvable(context: Context) = resolveActivity(context.packageManager) != null
 
