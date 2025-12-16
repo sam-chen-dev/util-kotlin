@@ -725,12 +725,12 @@ fun Fragment.isConfigChanging() = requireActivity().isChangingConfigurations
 
 fun Fragment.isLandscapeMode() = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-fun Fragment.setLandscapeMode() {
-    requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-}
-
 fun Fragment.setPortraitMode() {
     requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+}
+
+fun Fragment.setLandscapeMode() {
+    requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 }
 
 fun Fragment.hideSystemBars() {
