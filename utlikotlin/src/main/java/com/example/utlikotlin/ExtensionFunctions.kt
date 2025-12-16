@@ -722,14 +722,6 @@ fun Fragment.getRawUris(arrayResId: Int): List<Uri> {
 
 fun Fragment.isLandscapeMode() = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-fun Fragment.rotateScreen() {
-    if (isLandscapeMode()) {
-        setPortraitMode()
-    } else {
-        setLandscapeMode()
-    }
-}
-
 fun Fragment.setLandscapeMode() {
     requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 }
