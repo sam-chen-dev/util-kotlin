@@ -60,6 +60,7 @@ import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.core.util.forEach
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.children
@@ -730,6 +731,14 @@ fun Fragment.setLandscapeMode() {
 
 fun Fragment.setPortraitMode() {
     requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+}
+
+fun Fragment.hideSystemBars() {
+    WindowCompat.getInsetsController(requireActivity().window, requireActivity().window.decorView).apply {
+        hide(WindowInsetsCompat.Type.systemBars())
+
+        systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    }
 }
 
 fun Fragment.setReverseLandscapeMode() {
