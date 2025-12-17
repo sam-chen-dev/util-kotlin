@@ -839,6 +839,17 @@ fun Fragment.goToPreviousPageOnBackPressed(viewPager: ViewPager2) {
     }
 }
 
+fun Fragment.exitFullscreenModeOnBackPressed() = with(requireActivity().onBackPressedDispatcher) {
+    addCallback(viewLifecycleOwner) {
+        if (isLandscapeMode()) {
+            setPortraitMode()
+        } else {
+            remove()
+            onBackPressed()
+        }
+    }
+}
+
 fun Fragment.getStatusBarHeight(): Int {
     val statusBarHeight = resources.getIdentifier("status_bar_height", "dimen", "android")
 
