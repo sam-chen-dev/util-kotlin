@@ -24,7 +24,6 @@ import android.net.ConnectivityManager
 import android.net.InetAddresses
 import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.os.Environment
 import android.os.Parcelable
 import android.os.PowerManager
@@ -44,7 +43,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.webkit.URLUtil
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.CompoundButton
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.PopupWindow
+import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
@@ -69,7 +76,11 @@ import androidx.core.view.get
 import androidx.core.view.updateLayoutParams
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -92,13 +103,19 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
 import java.nio.charset.Charset
-import java.time.*
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 fun Int.dp(context: Context) = this * context.resources.displayMetrics.density
@@ -747,14 +764,6 @@ fun Fragment.setReverseLandscapeMode() {
 
 fun Fragment.setReversePortraitMode() {
     requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT
-}
-
-fun Fragment.setFragmentResult(requestKeyResId: Int, result: Bundle) {
-    parentFragmentManager.setFragmentResult(getString(requestKeyResId), result)
-}
-
-fun Fragment.setFragmentResultListener(requestKeyResId: Int, listener: (String, Bundle) -> Unit) {
-    parentFragmentManager.setFragmentResultListener(getString(requestKeyResId), viewLifecycleOwner, listener)
 }
 
 fun Fragment.setActionBar(toolbar: MaterialToolbar) {
