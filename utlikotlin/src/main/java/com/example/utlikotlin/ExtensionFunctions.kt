@@ -1030,7 +1030,7 @@ suspend fun AndroidViewModel.readFileFromAssets(path: String): String? {
     try {
         return getAssets().open(path).bufferedReader().use { it.readText() }
     } catch (e: Exception) {
-        Log.v("readFileFromAssets()", "Error: [${e.javaClass.simpleName}]: ${e.message.toString()}")
+        Log.e("readFileFromAssets()", "Error: [${e.javaClass.simpleName}]: ${e.message.toString()}")
         return null
     }
 }
