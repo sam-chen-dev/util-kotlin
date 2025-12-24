@@ -11,6 +11,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.ContentValues
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
@@ -363,12 +364,6 @@ fun ImageButton.setEnableWithEffect(isEnable: Boolean) {
 
 fun Button.setIconResource(resId: Int) = (this as MaterialButton).setIconResource(resId)
 
-fun EditText.focusOnLast() {
-    requestFocus()
-
-    setSelection(text.toString().length)
-}
-
 fun EditText.enableScroll() = setOnTouchListener { view, event ->
     view.parent.requestDisallowInterceptTouchEvent(true)
 
@@ -382,6 +377,8 @@ fun EditText.enableScroll() = setOnTouchListener { view, event ->
 fun EditText.requestFocusAndShowKeyboard(alertDialog: AlertDialog) {
     requestFocus()
 
+    setSelection(text.toString().length)
+
     alertDialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
 }
 
@@ -390,6 +387,8 @@ fun AutoCompleteTextView.setData(data: List<String>) {
 
     setAdapter(adapter)
 }
+
+fun AlertDialog.getPositiveButton() = getButton(DialogInterface.BUTTON_POSITIVE)
 
 fun AlertDialog.showIfNotShowing() {
     if (!isShowing) {
