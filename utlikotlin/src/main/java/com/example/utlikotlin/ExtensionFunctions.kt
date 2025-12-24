@@ -23,7 +23,6 @@ import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.InetAddresses
 import android.net.Uri
-import android.os.Build
 import android.os.Environment
 import android.os.Parcelable
 import android.os.PowerManager
@@ -57,7 +56,6 @@ import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -153,7 +151,6 @@ fun String.toBytes() = this.toByteArray(Charset.forName("GBK"))
 
 fun String.isValidEmailAddress() = Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
-@RequiresApi(Build.VERSION_CODES.Q)
 fun String.isValidIpAddress() = InetAddresses.isNumericAddress(this)
 
 fun String.isValidUrl() = URLUtil.isValidUrl(this)
