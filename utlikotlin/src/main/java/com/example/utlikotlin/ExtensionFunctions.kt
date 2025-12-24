@@ -99,7 +99,6 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import kotlinx.coroutines.CoroutineScope
@@ -367,7 +366,7 @@ fun ImageButton.setEnableWithEffect(isEnable: Boolean) {
 
 fun Button.setIconResource(resId: Int) = (this as MaterialButton).setIconResource(resId)
 
-fun TextInputEditText.focusOnLast() {
+fun EditText.focusOnLast() {
     requestFocus()
 
     setSelection(text.toString().length)
@@ -381,6 +380,12 @@ fun EditText.enableScroll() = setOnTouchListener { view, event ->
     }
 
     false
+}
+
+fun EditText.requestFocusAndShowKeyboard(alertDialog: AlertDialog) {
+    requestFocus()
+
+    alertDialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
 }
 
 fun AutoCompleteTextView.setData(data: List<String>) {
