@@ -7,6 +7,8 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 
 object DateTimeHelper {
+    fun now(format: String) = System.currentTimeMillis().toFormattedDateTimeString(format)
+
     fun createEpochMillis(year: Int, month: Int, day: Int, hour: Int, minute: Int): Long {
         val localDate = LocalDate.of(year, month, day)
         val localTime = LocalTime.of(hour, minute)
