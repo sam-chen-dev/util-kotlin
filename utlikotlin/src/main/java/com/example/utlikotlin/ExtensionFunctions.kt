@@ -377,9 +377,12 @@ fun EditText.enableScroll() = setOnTouchListener { view, event ->
 fun EditText.requestFocusAndShowKeyboard(alertDialog: AlertDialog) {
     requestFocus()
 
-    setSelection(text.toString().length)
-
     alertDialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+}
+
+fun EditText.setTextAndMoveCursorToLast(value: String) {
+    setText(value)
+    setSelection(text.toString().length)
 }
 
 fun AutoCompleteTextView.setData(data: List<String>) {
