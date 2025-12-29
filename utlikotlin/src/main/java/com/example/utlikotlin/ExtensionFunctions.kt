@@ -466,6 +466,14 @@ fun AppCompatActivity.hideActionBar() = supportActionBar?.hide()
 
 fun AppCompatActivity.showActionBar() = supportActionBar?.show()
 
+fun AppCompatActivity.showToast(text: String) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+
+fun AppCompatActivity.showToast(resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
+
+fun AppCompatActivity.showToastLong(text: String) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+
+fun AppCompatActivity.showToastLong(resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_LONG).show()
+
 fun AppCompatActivity.setupEdgeToEdge(
     contentView: View,
     statusBarBackgroundView: View? = null,
