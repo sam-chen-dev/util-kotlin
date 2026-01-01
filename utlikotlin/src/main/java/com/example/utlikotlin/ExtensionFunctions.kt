@@ -33,7 +33,6 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.style.ClickableSpan
-import android.util.Base64
 import android.util.Log
 import android.util.Patterns
 import android.util.SparseBooleanArray
@@ -110,11 +109,14 @@ import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
 import java.nio.charset.Charset
+import java.security.MessageDigest
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import javax.crypto.SecretKey
+import javax.crypto.spec.SecretKeySpec
 
 fun Int.dp(context: Context) = this * context.resources.displayMetrics.density
 
@@ -156,14 +158,17 @@ fun String.isValidIpAddress() = InetAddresses.isNumericAddress(this)
 
 fun String.isValidUrl() = URLUtil.isValidUrl(this)
 
-fun String.toEncryptedString(): String = Base64.encodeToString(this.toByteArray(), Base64.NO_PADDING)
-
-fun String.toDecryptedString() = Base64.decode(this, Base64.NO_PADDING).decodeToString()
-
 fun String.toDateTimeLong(dateTimeFormat: String): Long {
     val dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimeFormat)
 
     return LocalDateTime.parse(this, dateTimeFormatter).toSystemMillis()
+}
+
+fun String.toSecretKey(): SecretKey {
+    val messageDigest = MessageDigest.getInstance("SHA-256")
+    val secretKeyData = messageDigest.digest(this.toByteArray())
+
+    return SecretKeySpec(secretKeyData, "AES")
 }
 
 fun Bitmap.toEscBytes() = EscBitmapHelper.getBytes(this)
