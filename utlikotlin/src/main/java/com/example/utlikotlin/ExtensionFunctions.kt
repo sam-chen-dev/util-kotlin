@@ -602,6 +602,16 @@ fun Fragment.takeAndSavePicture(requestCode: Int, imageUri: Uri) {
     startActivityForResult(intent, requestCode)
 }
 
+fun Fragment.sendEmail(recipient: String, subject: String, message: String) {
+    val intent = Intent(Intent.ACTION_SENDTO, "mailto:".toUri()).apply {
+        putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
+        putExtra(Intent.EXTRA_SUBJECT, subject)
+        putExtra(Intent.EXTRA_TEXT, message)
+    }
+
+    startActivity(intent)
+}
+
 fun Fragment.isGpsOn(): Boolean {
     val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
