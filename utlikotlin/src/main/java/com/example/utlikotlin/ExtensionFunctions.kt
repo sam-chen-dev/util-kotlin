@@ -158,6 +158,8 @@ fun String.isValidIpAddress() = InetAddresses.isNumericAddress(this)
 
 fun String.isValidUrl() = URLUtil.isValidUrl(this)
 
+fun String.uppercaseFirstLetter() = this.replaceFirstChar(Char::uppercase)
+
 fun String.toDateTimeLong(dateTimeFormat: String): Long {
     val dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimeFormat)
 
