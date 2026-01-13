@@ -433,16 +433,6 @@ fun Dialog.setNavigationBarStyle(isDarkNavigationBar: Boolean) {
     WindowInsetsControllerCompat(window!!, window!!.decorView).isAppearanceLightNavigationBars = !isDarkNavigationBar
 }
 
-fun ViewPager2.goToNextPage() = currentItem++
-
-fun ViewPager2.setOnPageChangeListener(onChange: (Int) -> Unit) {
-    registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageSelected(position: Int) {
-            onChange(position)
-        }
-    })
-}
-
 fun BottomNavigationView.setSelectedItemIndex(index: Int) {
     selectedItemId = menu[index].itemId
 }
@@ -867,10 +857,10 @@ fun Fragment.closeDrawerOnBackPressed(drawer: DrawerLayout) {
     }
 }
 
-fun Fragment.goToPreviousPageOnBackPressed(viewPager: ViewPager2) {
+fun Fragment.goToPreviousPageOnBackPressed(viewPager: ViewPager2, duration: Long) {
     requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
         if (viewPager.currentItem != 0) {
-            viewPager.currentItem--
+            viewPager.setCurrentItem(viewPager.currentItem - 1, duration)
         } else {
             requireActivity().finish()
         }
