@@ -20,6 +20,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Rect
+import android.graphics.drawable.AnimationDrawable
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.InetAddresses
@@ -280,6 +281,13 @@ fun View.slideUp() {
     val behavior = layoutParams.behavior as HideBottomViewOnScrollBehavior
 
     behavior.slideUp(this)
+}
+
+fun View.startGradientAnimation(transitionDuration: Int) {
+    (background as AnimationDrawable).apply {
+        setExitFadeDuration(transitionDuration)
+        start()
+    }
 }
 
 fun View.getXmlHeight(): Int {
