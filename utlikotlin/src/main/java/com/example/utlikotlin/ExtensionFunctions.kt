@@ -90,6 +90,8 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -118,6 +120,7 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
+import kotlin.math.abs
 
 fun Int.dp(context: Context) = this * context.resources.displayMetrics.density
 
@@ -306,6 +309,14 @@ fun ViewGroup.getCheckedIndexes(): List<Int> {
     }
 
     return checkedIndexes
+}
+
+fun CollapsingToolbarLayout.showCollapsedTitleOnly(collapsedTitle: String) {
+    val appBarLayout = parent as AppBarLayout
+
+    appBarLayout.addOnOffsetChangedListener { _, verticalOffset ->
+        title = if (abs(verticalOffset) == appBarLayout.totalScrollRange) collapsedTitle else ""
+    }
 }
 
 fun RecyclerView.isAtTop() = !canScrollVertically(-1)
