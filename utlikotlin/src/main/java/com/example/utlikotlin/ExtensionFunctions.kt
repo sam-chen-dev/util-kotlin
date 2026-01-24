@@ -134,6 +134,8 @@ fun Int.toDigit(digit: Int): String {
     return num
 }
 
+fun Long.toIntId() = (this % Int.MAX_VALUE).toInt()
+
 fun Long.toSystemLocalTime() = this.toSystemLocalDateTime().toLocalTime()
 
 fun Long.toSystemLocalDate() = this.toSystemLocalDateTime().toLocalDate()
