@@ -9,7 +9,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 @OptIn(DelicateCoroutinesApi::class)
-fun BroadcastReceiver.goAsync(action: suspend CoroutineScope.(PendingResult) -> Unit) {
+fun BroadcastReceiver.runAsync(action: suspend CoroutineScope.(PendingResult) -> Unit) {
     val pendingResult = goAsync()
 
     GlobalScope.launch(Dispatchers.IO) {
