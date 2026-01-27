@@ -3,7 +3,6 @@ package com.example.utlikotlin
 import android.Manifest
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
-import android.app.AlarmManager
 import android.app.Dialog
 import android.app.DownloadManager
 import android.app.NotificationManager
@@ -75,7 +74,6 @@ import androidx.core.view.get
 import androidx.core.view.updateLayoutParams
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -1024,56 +1022,6 @@ fun Fragment.setSystemBarsStyle(isDarkStatusBar: Boolean, isDarkNavigationBar: B
 }
 
 fun Intent.isResolvable(context: Context) = resolveActivity(context.packageManager) != null
-
-fun AndroidViewModel.getConnectivityManager(): ConnectivityManager {
-    return (getApplication() as Context).getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-}
-
-fun AndroidViewModel.getAssets() = (getApplication() as Context).assets
-
-fun AndroidViewModel.getResources() = (getApplication() as Context).resources
-
-fun AndroidViewModel.getAlarmManager() = (getApplication() as Context).getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-fun AndroidViewModel.getInteger(resId: Int) = (getApplication() as Context).resources.getInteger(resId)
-
-fun AndroidViewModel.getString(resId: Int) = (getApplication() as Context).getString(resId)
-
-fun AndroidViewModel.getString(resId: Int, vararg formatArgs: Any) = (getApplication() as Context).getString(resId, *formatArgs)
-
-fun AndroidViewModel.showToast(text: String) = Toast.makeText(getApplication(), text, Toast.LENGTH_SHORT).show()
-
-fun AndroidViewModel.showToast(resId: Int) = Toast.makeText(getApplication(), resId, Toast.LENGTH_SHORT).show()
-
-fun AndroidViewModel.showToastLong(text: String) = Toast.makeText(getApplication(), text, Toast.LENGTH_LONG).show()
-
-fun AndroidViewModel.showToastLong(resId: Int) = Toast.makeText(getApplication(), resId, Toast.LENGTH_LONG).show()
-
-fun AndroidViewModel.getRawUri(resId: Int) = "android.resource://${(getApplication() as Context).packageName}/$resId".toUri()
-
-fun AndroidViewModel.getRawUris(arrayResId: Int): List<Uri> {
-    val rawUris = mutableListOf<Uri>()
-    val raws = (getApplication() as Context).resources.obtainTypedArray(arrayResId)
-
-    for (index in 0 until raws.length()) {
-        val resourceId = raws.getResourceId(index, 0)
-
-        rawUris.add(getRawUri(resourceId))
-    }
-
-    raws.recycle()
-
-    return rawUris
-}
-
-suspend fun AndroidViewModel.readFileFromAssets(path: String): String? {
-    try {
-        return getAssets().open(path).bufferedReader().use { it.readText() }
-    } catch (e: Exception) {
-        Log.e("readFileFromAssets()", "Error: [${e.javaClass.simpleName}]: ${e.message.toString()}")
-        return null
-    }
-}
 
 fun <T> MutableSharedFlow<T>.emit(coroutineScope: CoroutineScope, value: T) = coroutineScope.launch {
     emit(value)
