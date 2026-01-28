@@ -14,9 +14,9 @@ fun AndroidViewModel.getConnectivityManager(): ConnectivityManager {
     return (getApplication() as Context).getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 }
 
-fun AndroidViewModel.getAssets() = (getApplication() as Context).assets
+fun AndroidViewModel.getContentResolver() = (getApplication() as Context).contentResolver
 
-fun AndroidViewModel.getResources() = (getApplication() as Context).resources
+fun AndroidViewModel.getAssets() = (getApplication() as Context).assets
 
 fun AndroidViewModel.getInteger(resId: Int) = (getApplication() as Context).resources.getInteger(resId)
 
