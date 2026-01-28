@@ -3,10 +3,10 @@ package com.example.utlikotlin
 import android.content.Context
 import android.media.MediaPlayer
 
-class MediaPlayerHelper {
+class AudioPlayer {
     private var mediaPlayer: MediaPlayer? = null
 
-    fun playOrPauseAudio(context: Context, file: Any, isOverlaid: Boolean, isPauseReset: Boolean = true) {
+    fun playOrPause(context: Context, file: Any, isOverlaid: Boolean, isPauseReset: Boolean = true) {
         if (mediaPlayer == null || isOverlaid) {
             mediaPlayer = createMediaPlayer(context, file, isOverlaid)
 
@@ -25,7 +25,7 @@ class MediaPlayerHelper {
         }
     }
 
-    fun releasePlayer() {
+    fun release() {
         mediaPlayer?.release()
 
         mediaPlayer = null
