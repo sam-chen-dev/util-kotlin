@@ -7,13 +7,14 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferState
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
 import com.amazonaws.regions.Region
 import com.amazonaws.services.s3.AmazonS3Client
-import java.util.UUID
+import java.util.*
 
 fun AmazonS3Client.uploadPhoto(
     context: Context,
     uri: Uri,
     bucketName: String,
     region: Region,
+    onUploading: (Int) -> Unit,
     onUploaded: (String) -> Unit,
     onError: (Exception) -> Unit
 ) {
@@ -39,7 +40,9 @@ fun AmazonS3Client.uploadPhoto(
             }
         }
 
-        override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {}
+        override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {
+            onUploading(((bytesCurrent.toDouble() / bytesTotal.toDouble()).roundDecimal(2) * 100).toInt())
+        }
 
         override fun onError(id: Int, e: Exception) {
             onError(e)
