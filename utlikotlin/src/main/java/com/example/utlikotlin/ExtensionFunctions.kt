@@ -150,10 +150,6 @@ fun Long.toFormattedDateTimeString(format: String): String {
     return systemDateTime.format(DateTimeFormatter.ofPattern(format))
 }
 
-fun Double.roundDecimal(digit: Int) = "%,.${digit}f".format(this)
-
-fun Float.roundDecimal(digit: Int) = "%,.${digit}f".format(this)
-
 fun String.toBytes() = this.toByteArray(Charset.forName("GBK"))
 
 fun String.isValidEmailAddress() = Patterns.EMAIL_ADDRESS.matcher(this).matches()
