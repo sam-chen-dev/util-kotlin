@@ -7,15 +7,19 @@ import android.net.Uri
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.MediaController
+import android.widget.TextView
+import android.widget.VideoView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.material.appbar.AppBarLayout
@@ -63,28 +67,6 @@ fun setChecked(toggleGroup: MaterialButtonToggleGroup, checkedIndex: Int) {
 fun setChecked(toggleGroup: MaterialButtonToggleGroup, checkedIndexes: List<Int>) {
     checkedIndexes.forEach {
         (toggleGroup.getChildAt(it) as MaterialButton).isChecked = true
-    }
-}
-
-@BindingAdapter("imageUrl")
-fun setImageResource(imageView: ImageView, imageUrl: String?) {
-    imageUrl?.let {
-        val uri = it.toUri().buildUpon().scheme("https").build()
-
-        Glide.with(imageView.context).load(uri).into(imageView)
-    }
-}
-
-@BindingAdapter("imageUrl", "placeHolderImage", "errorImage")
-fun setImageResource(imageView: ImageView, imageUrl: String?, placeHolderImage: Drawable, errorImage: Drawable) {
-    imageUrl?.let {
-        val uri = it.toUri().buildUpon().scheme("https").build()
-        val options = RequestOptions().placeholder(placeHolderImage).error(errorImage)
-
-        Glide.with(imageView.context).load(uri).apply {
-            apply(options)
-            into(imageView)
-        }
     }
 }
 
