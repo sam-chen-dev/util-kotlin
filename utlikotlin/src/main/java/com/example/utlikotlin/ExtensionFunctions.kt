@@ -82,7 +82,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -328,16 +327,6 @@ fun RecyclerView.showDivider() = addItemDecoration(DividerItemDecoration(context
 fun RecyclerView.getState() = layoutManager?.onSaveInstanceState()
 
 fun RecyclerView.setState(state: Parcelable?) = layoutManager?.onRestoreInstanceState(state)
-
-fun ImageView.load(url: String) {
-    val uri = url.toUri().buildUpon().scheme("https").build()
-
-    Glide.with(context).load(uri).into(this)
-}
-
-fun ImageView.load(uri: Uri) = Glide.with(context).load(uri).into(this)
-
-fun ImageView.loadGif(resId: Int) = Glide.with(context).asGif().load(resId).into(this)
 
 fun ImageView.copy(xOffset: Int, yOffSet: Int): ImageView {
     val currentImageView = this
