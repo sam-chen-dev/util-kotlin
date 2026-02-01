@@ -81,6 +81,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionInflater
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
@@ -1004,6 +1005,12 @@ fun Fragment.setSystemBarsStyle(isDarkStatusBar: Boolean, isDarkNavigationBar: B
     val navigationBarStyle = if (isDarkNavigationBar) darkSystemBarStyle else lightSystemBarStyle
 
     requireActivity().enableEdgeToEdge(statusBarStyle, navigationBarStyle)
+}
+
+fun Fragment.setSharedElementTransition() {
+    val transitionInflater = TransitionInflater.from(requireContext())
+
+    sharedElementEnterTransition = transitionInflater.inflateTransition(android.R.transition.move)
 }
 
 fun Intent.isResolvable(context: Context) = resolveActivity(context.packageManager) != null
