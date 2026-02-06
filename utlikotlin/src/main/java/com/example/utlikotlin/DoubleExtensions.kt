@@ -8,3 +8,5 @@ fun Double.roundDecimal(digit: Int): Double {
 
     return round(this * factor) / factor
 }
+
+fun Double.showDecimal(digit: Int) = String.format("%.${digit}f", this)
