@@ -201,16 +201,6 @@ fun Uri.toBitmap(context: Context): Bitmap? {
     }
 }
 
-fun <T> List<T>.range(fromIndex: Int, toIndex: Int) = this.subList(fromIndex, toIndex + 1)
-
-fun <T> List<T>.replace(targetItem: T, newItem: T) = map {
-    if (it == targetItem) {
-        newItem
-    } else {
-        it
-    }
-}
-
 fun SparseBooleanArray.toIndexes(): List<Int> {
     val indexes = mutableListOf<Int>()
 
