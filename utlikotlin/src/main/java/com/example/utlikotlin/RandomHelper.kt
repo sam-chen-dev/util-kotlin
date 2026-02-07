@@ -12,4 +12,10 @@ object RandomHelper {
     val lowerLetters = lowercaseLetters
     val upperLetters = uppercaseLetters
     val letters = lowercaseLetters + uppercaseLetters
+
+    fun generateRandomString(length: Int) = buildString {
+        repeat(length) {
+            append(numbersAndLetters.random())
+        }
+    }
 }
