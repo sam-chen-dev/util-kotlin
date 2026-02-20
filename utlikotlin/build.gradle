@@ -80,7 +80,7 @@ dependencies {
     implementation("com.amazonaws:aws-android-sdk-s3:2.81.1")
 
     implementation("com.google.android.gms:play-services-wallet:19.5.0")
-    implementation("com.stripe:stripe-android:22.8.0")
+    implementation("com.stripe:stripe-android:22.8.1")
 }
 
 afterEvaluate {
