@@ -74,10 +74,6 @@ import androidx.core.view.get
 import androidx.core.view.updateLayoutParams
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -100,12 +96,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
@@ -1004,28 +994,6 @@ fun Fragment.setSharedElementTransition() {
 }
 
 fun Intent.isResolvable(context: Context) = resolveActivity(context.packageManager) != null
-
-fun <T> MutableSharedFlow<T>.emit(coroutineScope: CoroutineScope, value: T) = coroutineScope.launch {
-    emit(value)
-}
-
-fun <T> Flow<T>.collect(coroutineScope: CoroutineScope, action: suspend (T) -> Unit) = coroutineScope.launch {
-    collect { action(it) }
-}
-
-fun <T> Flow<T>.collectOnCreated(lifecycleOwner: LifecycleOwner, action: suspend (T) -> Unit) = lifecycleOwner.lifecycleScope.launch {
-    lifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
-        collect { action(it) }
-    }
-}
-
-fun <T> Flow<T>.collectOnStarted(lifecycleOwner: LifecycleOwner, action: suspend (T) -> Unit) = lifecycleOwner.lifecycleScope.launch {
-    lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-        collect { action(it) }
-    }
-}
-
-fun <R> Flow<R>.toStateFlow(coroutineScope: CoroutineScope, initialValue: R) = stateIn(coroutineScope, SharingStarted.Lazily, initialValue)
 
 fun DownloadManager.getDownloadedFile(id: Long): DownloadedFile {
     var url = ""
