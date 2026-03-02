@@ -74,7 +74,7 @@ dependencies {
 
     implementation("androidx.media3:media3-exoplayer:1.9.2")
 
-    implementation("androidx.credentials:credentials:1.6.0-rc01")
+    implementation("androidx.credentials:credentials:1.6.0-rc02")
     implementation("com.google.android.libraries.identity.googleid:googleid:1.2.0")
 
     implementation("com.amazonaws:aws-android-sdk-s3:2.81.1")
