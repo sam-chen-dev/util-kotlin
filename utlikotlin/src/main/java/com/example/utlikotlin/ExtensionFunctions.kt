@@ -72,6 +72,7 @@ import androidx.core.view.children
 import androidx.core.view.forEachIndexed
 import androidx.core.view.get
 import androidx.core.view.updateLayoutParams
+import androidx.core.widget.NestedScrollView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
@@ -308,6 +309,8 @@ fun RecyclerView.showDivider() = addItemDecoration(DividerItemDecoration(context
 fun RecyclerView.getState() = layoutManager?.onSaveInstanceState()
 
 fun RecyclerView.setState(state: Parcelable?) = layoutManager?.onRestoreInstanceState(state)
+
+fun NestedScrollView.scrollToTop() = scrollTo(0, 0)
 
 fun ImageView.copy(xOffset: Int, yOffSet: Int): ImageView {
     val currentImageView = this
