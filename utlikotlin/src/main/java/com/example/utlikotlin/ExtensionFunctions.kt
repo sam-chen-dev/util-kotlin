@@ -107,6 +107,7 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.UUID
 import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
 import kotlin.math.abs
@@ -901,9 +902,9 @@ fun Fragment.getSpannableString(stringResId: Int, span: Any, start: Int, end: In
     setSpan(span, start, end + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 }
 
-fun Fragment.copyToClipboard(label: String, text: String) {
+fun Fragment.copyToClipboard(text: String) {
     val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clipData = ClipData.newPlainText(label, text)
+    val clipData = ClipData.newPlainText(UUID.randomUUID().toString(), text)
 
     clipboardManager.setPrimaryClip(clipData)
 }
