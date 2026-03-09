@@ -24,9 +24,12 @@ import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.InetAddresses
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.os.Parcelable
 import android.os.PowerManager
+import android.os.Vibrator
+import android.os.VibratorManager
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.SpannableString
@@ -56,6 +59,7 @@ import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -537,6 +541,9 @@ fun Fragment.getNotificationManager() = requireContext().getSystemService(Notifi
 
 fun Fragment.getPowerManager() = requireContext().getSystemService(Context.POWER_SERVICE) as PowerManager
 
+@RequiresApi(Build.VERSION_CODES.S)
+fun Fragment.getVibratorManager() = requireContext().getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+
 fun Fragment.getFragmentById(id: Int) = childFragmentManager.findFragmentById(id)
 
 fun Fragment.getMapFragmentById(id: Int) = childFragmentManager.findFragmentById(id) as SupportMapFragment
@@ -688,6 +695,14 @@ fun Fragment.showAppOnAppStore(packageName: String) {
     val intent = Intent(Intent.ACTION_VIEW, uri)
 
     startActivity(intent)
+}
+
+fun Fragment.getVibrator(): Vibrator {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        getVibratorManager().defaultVibrator
+    } else {
+        requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+    }
 }
 
 fun Fragment.openAssetsFile(fileName: String) {
