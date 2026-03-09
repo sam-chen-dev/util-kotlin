@@ -438,9 +438,9 @@ fun BottomNavigationView.setOnItemSelectListener(onSelect: (Int) -> Unit) {
     }
 }
 
-fun Context.getConnectivityManager() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+fun Context.getConnectivityManager() = getSystemService(ConnectivityManager::class.java)
 
-fun Context.getNotificationManager() = getSystemService(NotificationManager::class.java) as NotificationManager
+fun Context.getNotificationManager() = getSystemService(NotificationManager::class.java)
 
 fun Context.cancelNotification() = getSystemService(NotificationManager::class.java).cancelAll()
 
@@ -533,20 +533,20 @@ fun AppCompatActivity.setupEdgeToEdge(
     }
 }
 
-fun Fragment.hideUpButton() = (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+fun Fragment.getConnectivityManager() = requireContext().getSystemService(ConnectivityManager::class.java)
 
-fun Fragment.getConnectivityManager() = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+fun Fragment.getNotificationManager() = requireContext().getSystemService(NotificationManager::class.java)
 
-fun Fragment.getNotificationManager() = requireContext().getSystemService(NotificationManager::class.java) as NotificationManager
-
-fun Fragment.getPowerManager() = requireContext().getSystemService(Context.POWER_SERVICE) as PowerManager
+fun Fragment.getPowerManager() = requireContext().getSystemService(PowerManager::class.java)
 
 @RequiresApi(Build.VERSION_CODES.S)
-fun Fragment.getVibratorManager() = requireContext().getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+fun Fragment.getVibratorManager() = requireContext().getSystemService(VibratorManager::class.java)
 
 fun Fragment.getFragmentById(id: Int) = childFragmentManager.findFragmentById(id)
 
 fun Fragment.getMapFragmentById(id: Int) = childFragmentManager.findFragmentById(id) as SupportMapFragment
+
+fun Fragment.hideUpButton() = (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
 fun Fragment.showToast(text: String) = Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
 
@@ -601,7 +601,7 @@ fun Fragment.sendEmail(recipient: String, subject: String, message: String) {
 }
 
 fun Fragment.isGpsOn(): Boolean {
-    val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    val locationManager = requireContext().getSystemService(LocationManager::class.java)
 
     return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 }
@@ -701,7 +701,7 @@ fun Fragment.getVibrator(): Vibrator {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         getVibratorManager().defaultVibrator
     } else {
-        requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        requireContext().getSystemService(Vibrator::class.java)
     }
 }
 
@@ -918,7 +918,7 @@ fun Fragment.getSpannableString(stringResId: Int, span: Any, start: Int, end: In
 }
 
 fun Fragment.copyToClipboard(text: String) {
-    val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clipboardManager = requireContext().getSystemService(ClipboardManager::class.java)
     val clipData = ClipData.newPlainText(UUID.randomUUID().toString(), text)
 
     clipboardManager.setPrimaryClip(clipData)
