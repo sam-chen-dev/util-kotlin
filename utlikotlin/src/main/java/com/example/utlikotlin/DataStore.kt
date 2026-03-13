@@ -101,6 +101,15 @@ object DataStore {
         }
     }
 
+    suspend fun saveLong(context: Context, keyResId: Int, valueResId: Int) {
+        val key = longPreferencesKey(context.getString(keyResId))
+        val value = context.resources.getInteger(valueResId).toLong()
+
+        context.settings.edit {
+            it[key] = value
+        }
+    }
+
     fun getLongFlow(context: Context, keyResId: Int, defaultValueResId: Int): Flow<Long> {
         val key = longPreferencesKey(context.getString(keyResId))
         val defaultValue = context.resources.getInteger(defaultValueResId).toLong()
