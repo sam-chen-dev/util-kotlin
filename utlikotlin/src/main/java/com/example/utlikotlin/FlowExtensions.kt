@@ -29,6 +29,12 @@ fun <T> Flow<T>.collectOnStarted(lifecycleOwner: LifecycleOwner, action: suspend
     }
 }
 
+fun <T> Flow<T>.collectOnResumed(lifecycleOwner: LifecycleOwner, action: suspend (T) -> Unit) = lifecycleOwner.lifecycleScope.launch {
+    lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+        collect { action(it) }
+    }
+}
+
 fun <R> Flow<R>.toStateFlow(coroutineScope: CoroutineScope, initialValue: R): StateFlow<R> {
     return stateIn(coroutineScope, SharingStarted.Lazily, initialValue)
 }
