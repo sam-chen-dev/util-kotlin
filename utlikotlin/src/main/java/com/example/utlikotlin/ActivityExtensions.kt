@@ -1,5 +1,6 @@
 package com.example.utlikotlin
 
+import android.content.Intent
 import android.graphics.Color
 import android.view.View
 import android.widget.Toast
@@ -24,6 +25,8 @@ fun AppCompatActivity.showToast(resId: Int) = Toast.makeText(this, resId, Toast.
 fun AppCompatActivity.showToastLong(text: String) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 
 fun AppCompatActivity.showToastLong(resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_LONG).show()
+
+fun AppCompatActivity.isLaunchFromRecentApps() = (intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0
 
 fun AppCompatActivity.setupEdgeToEdge(
     contentView: View,
