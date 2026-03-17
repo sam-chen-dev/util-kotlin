@@ -26,7 +26,7 @@ fun AppCompatActivity.showToastLong(text: String) = Toast.makeText(this, text, T
 
 fun AppCompatActivity.showToastLong(resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_LONG).show()
 
-fun AppCompatActivity.isLaunchFromRecentApps() = (intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0
+fun AppCompatActivity.isLaunchedFromRecentApps() = (intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0
 
 fun AppCompatActivity.setupEdgeToEdge(
     contentView: View,
