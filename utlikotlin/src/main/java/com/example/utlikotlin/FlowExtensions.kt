@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -26,6 +27,12 @@ fun <T> Flow<T>.collectOnCreated(lifecycleOwner: LifecycleOwner, action: suspend
 fun <T> Flow<T>.collectOnStarted(lifecycleOwner: LifecycleOwner, action: suspend (T) -> Unit) = lifecycleOwner.lifecycleScope.launch {
     lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
         collect { action(it) }
+    }
+}
+
+fun <T> Flow<T>.collectLatestOnStarted(lifecycleOwner: LifecycleOwner, action: suspend (T) -> Unit) = lifecycleOwner.lifecycleScope.launch {
+    lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+        collectLatest { action(it) }
     }
 }
 
