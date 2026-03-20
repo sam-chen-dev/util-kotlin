@@ -503,6 +503,57 @@ fun Fragment.setupEdgeToEdge(
     }
 }
 
+fun Fragment.setupEdgeToEdge2(
+    contentView: View,
+    topView: View?,
+    bottomView: View?,
+    navigationView: NavigationView?,
+    isDarkStatusBar: Boolean,
+    isDarkNavigationBar: Boolean
+) {
+    val lightSystemBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+    val darkSystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
+
+    val statusBarStyle = if (isDarkStatusBar) darkSystemBarStyle else lightSystemBarStyle
+    val navigationBarStyle = if (isDarkNavigationBar) darkSystemBarStyle else lightSystemBarStyle
+
+    requireActivity().enableEdgeToEdge(statusBarStyle, navigationBarStyle)
+
+    val topViewOriginalHeight = topView?.getXmlHeight() ?: 0
+    val bottomViewOriginalHeight = bottomView?.getXmlHeight() ?: 0
+
+    ViewCompat.setOnApplyWindowInsetsListener(contentView) { view, insets ->
+        val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+        val keyboardInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+        val topPadding = if (topView == null) systemBarInsets.top else 0
+        val bottomPadding = if (bottomView == null) {
+            if (keyboardInsets.bottom == 0) systemBarInsets.bottom else keyboardInsets.bottom
+        } else 0
+
+        topView?.apply {
+            updateLayoutParams {
+                height = topViewOriginalHeight + systemBarInsets.top
+            }
+
+            setPadding(0, systemBarInsets.top, 0, 0)
+        }
+
+        bottomView?.apply {
+            updateLayoutParams {
+                height = bottomViewOriginalHeight + systemBarInsets.bottom
+            }
+
+            setPadding(0, 0, 0, systemBarInsets.bottom)
+        }
+
+        navigationView?.setPadding(0, systemBarInsets.top, 0, systemBarInsets.bottom)
+
+        view.setPadding(0, topPadding, 0, bottomPadding)
+
+        WindowInsetsCompat.CONSUMED
+    }
+}
+
 fun Fragment.setupEdgeToEdge(
     contentView: View,
     subContentView: View,
