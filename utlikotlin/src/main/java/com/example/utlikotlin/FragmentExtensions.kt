@@ -190,6 +190,23 @@ fun Fragment.requestNotificationPermission(launcher: ActivityResultLauncher<Stri
     launcher.launch(Manifest.permission.POST_NOTIFICATIONS)
 }
 
+@RequiresApi(Build.VERSION_CODES.S)
+fun Fragment.isBluetoothPermissionGranted(): Boolean {
+    val result = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.BLUETOOTH_SCAN)
+
+    return result == PackageManager.PERMISSION_GRANTED
+}
+
+@RequiresApi(Build.VERSION_CODES.S)
+fun Fragment.requestBluetoothPermission(launcher: ActivityResultLauncher<Array<String>>) {
+    launcher.launch(
+        arrayOf(
+            Manifest.permission.BLUETOOTH_SCAN,
+            Manifest.permission.BLUETOOTH_CONNECT
+        )
+    )
+}
+
 fun Fragment.requestPermissions(request: ActivityResultLauncher<Array<String>>, permissions: Array<String>) = request.launch(permissions)
 
 fun Fragment.isAllPermissionsGranted(permissions: Array<String>) = permissions.all {
