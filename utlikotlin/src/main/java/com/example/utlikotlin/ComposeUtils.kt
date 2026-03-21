@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.LocalActivity
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
@@ -59,6 +60,13 @@ fun IconButton(
 @Composable
 fun IconButton(text: String, onClick: () -> Unit) {
     IconButton(onClick) {
+        Text(text)
+    }
+}
+
+@Composable
+fun Button(text: String, onClick: () -> Unit) {
+    Button(onClick) {
         Text(text)
     }
 }
