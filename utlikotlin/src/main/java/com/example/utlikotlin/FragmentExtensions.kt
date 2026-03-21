@@ -2,6 +2,7 @@ package com.example.utlikotlin
 
 import android.Manifest
 import android.app.NotificationManager
+import android.bluetooth.BluetoothManager
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.ContentValues
@@ -205,6 +206,12 @@ fun Fragment.requestBluetoothPermission(launcher: ActivityResultLauncher<Array<S
             Manifest.permission.BLUETOOTH_CONNECT
         )
     )
+}
+
+fun Fragment.isBluetoothEnabled(): Boolean {
+    val bluetoothManager = requireContext().getSystemService(BluetoothManager::class.java)
+
+    return bluetoothManager.adapter.isEnabled
 }
 
 fun Fragment.requestPermissions(request: ActivityResultLauncher<Array<String>>, permissions: Array<String>) = request.launch(permissions)
