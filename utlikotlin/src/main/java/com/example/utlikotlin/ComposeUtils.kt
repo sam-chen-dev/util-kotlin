@@ -34,7 +34,10 @@ fun Icon(resId: Int, contentDescription: String, tint: Color = LocalContentColor
 
 @Composable
 fun IconButton(
-    resId: Int, contentDescription: String, onClick: () -> Unit, tint: Color = LocalContentColor.current
+    resId: Int,
+    contentDescription: String,
+    onClick: () -> Unit,
+    tint: Color = LocalContentColor.current
 ) {
     IconButton(onClick) {
         Icon(resId, contentDescription, tint)
@@ -43,7 +46,10 @@ fun IconButton(
 
 @Composable
 fun IconButton(
-    imageVector: ImageVector, contentDescription: String, onClick: () -> Unit, tint: Color = LocalContentColor.current
+    imageVector: ImageVector,
+    contentDescription: String, 
+    onClick: () -> Unit,
+    tint: Color = LocalContentColor.current
 ) {
     IconButton(onClick) {
         Icon(imageVector, contentDescription, tint = tint)
