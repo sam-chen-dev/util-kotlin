@@ -47,7 +47,7 @@ fun IconButton(
 @Composable
 fun IconButton(
     imageVector: ImageVector,
-    contentDescription: String, 
+    contentDescription: String,
     onClick: () -> Unit,
     tint: Color = LocalContentColor.current
 ) {
