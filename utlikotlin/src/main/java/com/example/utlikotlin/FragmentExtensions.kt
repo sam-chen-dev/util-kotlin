@@ -52,6 +52,7 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -133,24 +134,26 @@ fun Fragment.sendEmail(recipient: String, subject: String, message: String) {
     startActivity(intent)
 }
 
-fun Fragment.isGpsOn(): Boolean {
+fun Fragment.isGpsEnabled(): Boolean {
     val locationManager = requireContext().getSystemService(LocationManager::class.java)
 
     return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 }
 
-fun Fragment.requestGpsOn(request: ActivityResultLauncher<IntentSenderRequest>) {
-    val locationRequest = LocationRequest.create().apply {
-        priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
+@RequiresApi(Build.VERSION_CODES.S)
+fun Fragment.requestEnableGps(request: ActivityResultLauncher<IntentSenderRequest>) {
+    val locationRequest = LocationRequest.Builder(1000L).run {
+        setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+        build()
     }
 
-    val settingRequest = LocationSettingsRequest.Builder().run {
+    val settingsRequest = LocationSettingsRequest.Builder().run {
         addLocationRequest(locationRequest)
         build()
     }
 
     val settingsClient = LocationServices.getSettingsClient(requireContext())
-    val task = settingsClient.checkLocationSettings(settingRequest)
+    val task = settingsClient.checkLocationSettings(settingsRequest)
 
     task.addOnFailureListener {
         val intentSender = (it as ResolvableApiException).resolution.intentSender
