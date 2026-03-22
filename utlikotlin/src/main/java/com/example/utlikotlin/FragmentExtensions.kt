@@ -221,6 +221,16 @@ fun Fragment.requestEnableBluetooth(launcher: ActivityResultLauncher<Intent>) {
     launcher.launch(intent)
 }
 
+fun Fragment.isLocationPermissionGranted(): Boolean {
+    val result = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+
+    return result == PackageManager.PERMISSION_GRANTED
+}
+
+fun Fragment.requestLocationPermission(launcher: ActivityResultLauncher<String>) {
+    launcher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+}
+
 fun Fragment.requestPermissions(request: ActivityResultLauncher<Array<String>>, permissions: Array<String>) = request.launch(permissions)
 
 fun Fragment.isAllPermissionsGranted(permissions: Array<String>) = permissions.all {
