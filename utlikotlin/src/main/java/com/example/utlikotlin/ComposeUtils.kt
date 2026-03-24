@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.TextUnit
+import coil3.compose.AsyncImage
 
 @Composable
 fun Text(resId: Int, color: Color = Color.Unspecified, fontSize: TextUnit = TextUnit.Unspecified) {
@@ -77,6 +78,11 @@ fun Button(text: String, onClick: () -> Unit) {
 @Composable
 fun Image(resId: Int, contentDescription: String, contentScale: ContentScale, modifier: Modifier = Modifier) {
     Image(painterResource(resId), contentDescription, contentScale = contentScale, modifier = modifier)
+}
+
+@Composable
+fun CoilImage(url: String, contentDescription: String, contentScale: ContentScale, modifier: Modifier = Modifier) {
+    AsyncImage(url, contentDescription, contentScale = contentScale, modifier = modifier)
 }
 
 /*@Composable
