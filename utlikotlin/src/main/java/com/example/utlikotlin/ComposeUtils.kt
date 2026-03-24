@@ -6,14 +6,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.LocalActivity
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.TextUnit
@@ -69,6 +72,11 @@ fun Button(text: String, onClick: () -> Unit) {
     Button(onClick) {
         Text(text)
     }
+}
+
+@Composable
+fun Image(resId: Int, contentDescription: String, contentScale: ContentScale, modifier: Modifier = Modifier) {
+    Image(painterResource(resId), contentDescription, contentScale = contentScale, modifier = modifier)
 }
 
 /*@Composable
