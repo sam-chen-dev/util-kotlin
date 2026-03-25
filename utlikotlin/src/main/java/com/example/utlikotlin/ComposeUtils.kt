@@ -8,10 +8,13 @@ import androidx.activity.compose.LocalActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -72,6 +75,27 @@ fun IconButton(text: String, onClick: () -> Unit) {
 fun Button(text: String, onClick: () -> Unit) {
     Button(onClick) {
         Text(text)
+    }
+}
+
+@Composable
+fun TextButton(resId: Int, onClick: () -> Unit) {
+    TextButton(onClick) {
+        Text(resId)
+    }
+}
+
+@Composable
+fun OutlinedButton(resId: Int, onClick: () -> Unit) {
+    OutlinedButton(onClick) {
+        Text(resId)
+    }
+}
+
+@Composable
+fun TonalButton(resId: Int, onClick: () -> Unit) {
+    FilledTonalButton(onClick) {
+        Text(resId)
     }
 }
 
