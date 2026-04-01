@@ -29,13 +29,23 @@ import androidx.compose.ui.unit.TextUnit
 import coil3.compose.AsyncImage
 
 @Composable
-fun Text(resId: Int, color: Color = Color.Unspecified, fontSize: TextUnit = TextUnit.Unspecified) {
-    Text(stringResource(resId), color = color, fontSize = fontSize)
+fun Text(
+    resId: Int,
+    color: Color = Color.Unspecified,
+    fontSize: TextUnit = TextUnit.Unspecified,
+    modifier: Modifier = Modifier
+) {
+    Text(stringResource(resId), color = color, fontSize = fontSize, modifier = modifier)
 }
 
 @Composable
-fun Text(text: String, color: Color = Color.Unspecified, fontSize: TextUnit = TextUnit.Unspecified) {
-    Text(text, color = color, fontSize = fontSize)
+fun Text(
+    text: String,
+    color: Color = Color.Unspecified,
+    fontSize: TextUnit = TextUnit.Unspecified,
+    modifier: Modifier = Modifier
+) {
+    Text(text, color = color, fontSize = fontSize, modifier = modifier)
 }
 
 @Composable
@@ -111,8 +121,8 @@ fun TonalIconButton(
 }
 
 @Composable
-fun Button(text: String, onClick: () -> Unit) {
-    Button(onClick) {
+fun Button(text: String, onClick: () -> Unit, isEnabled: Boolean = true) {
+    Button(onClick, enabled = isEnabled) {
         Text(text)
     }
 }
