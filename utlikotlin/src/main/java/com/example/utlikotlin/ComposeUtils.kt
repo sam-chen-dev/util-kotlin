@@ -180,13 +180,7 @@ fun PrimaryText(text: Any, fontSize: TextUnit, isBold: Boolean = false) {
         fontSize = fontSize,
         fontWeight = if (isBold) FontWeight.Bold else FontWeight.Normal
     )
-}
-
-@Composable
-fun VerticalSpacer(value: Dp) = Spacer(Modifier.height(value))
-
-@Composable
-fun HorizontalSpacer(value: Dp) = Spacer(Modifier.width(value))*/
+}*/
 
 @Composable
 fun SetSystemBarsStyle(isDarkStatusBar: Boolean, isDarkNavigationBar: Boolean) {
