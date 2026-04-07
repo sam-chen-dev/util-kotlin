@@ -3,7 +3,7 @@ package com.example.utlikotlin
 import android.content.Context
 import android.media.MediaPlayer
 
-class AudioPlayer {
+class LocalAudioPlayer {
     private var mediaPlayer: MediaPlayer? = null
 
     fun playOrPause(context: Context, file: Any, isOverlaid: Boolean, isPauseReset: Boolean = true) {
