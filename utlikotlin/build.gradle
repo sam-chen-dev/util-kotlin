@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion 36
+    compileSdkVersion 37
 
     defaultConfig {
         minSdkVersion 29
@@ -74,13 +74,13 @@ dependencies {
 
     implementation("androidx.media3:media3-exoplayer:1.10.0")
 
-    implementation("androidx.credentials:credentials:1.6.0-rc02")
+    implementation("androidx.credentials:credentials:1.6.0")
     implementation("com.google.android.libraries.identity.googleid:googleid:1.2.0")
 
     implementation("com.amazonaws:aws-android-sdk-s3:2.81.1")
 
-    implementation("com.google.android.gms:play-services-wallet:19.5.0")
-    implementation("com.stripe:stripe-android:23.3.0")
+    implementation("com.google.android.gms:play-services-wallet:20.0.0")
+    implementation("com.stripe:stripe-android:23.4.0")
 
     implementation("io.coil-kt.coil3:coil-compose:3.4.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.4.0")
