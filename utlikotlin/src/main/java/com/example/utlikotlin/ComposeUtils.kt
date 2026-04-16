@@ -7,6 +7,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.LocalActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.material3.Button
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.FilledTonalButton
@@ -16,9 +17,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedIconButton
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -156,6 +160,14 @@ fun Image(resId: Int, contentDescription: String, contentScale: ContentScale, mo
 @Composable
 fun CoilImage(url: String, contentDescription: String, contentScale: ContentScale, modifier: Modifier = Modifier) {
     AsyncImage(url, contentDescription, contentScale = contentScale, modifier = modifier)
+}
+
+@Composable
+fun BoxScope.SnackbarHost(hostState: SnackbarHostState) {
+    SnackbarHost(
+        hostState = hostState,
+        modifier = Modifier.align(Alignment.BottomCenter)
+    )
 }
 
 /*@Composable
