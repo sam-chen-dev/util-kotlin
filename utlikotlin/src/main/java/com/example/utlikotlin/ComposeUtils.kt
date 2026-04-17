@@ -30,7 +30,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.google.pay.button.ButtonType
+import com.google.pay.button.PayButton
 
 @Composable
 fun Text(
@@ -167,6 +170,17 @@ fun BoxScope.SnackbarHost(hostState: SnackbarHostState) {
     SnackbarHost(
         hostState = hostState,
         modifier = Modifier.align(Alignment.BottomCenter)
+    )
+}
+
+@Composable
+fun GooglePayButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    PayButton(
+        onClick = onClick,
+        allowedPaymentMethods = "[]",
+        type = ButtonType.Pay,
+        radius = 8.dp,
+        modifier = modifier
     )
 }
 
