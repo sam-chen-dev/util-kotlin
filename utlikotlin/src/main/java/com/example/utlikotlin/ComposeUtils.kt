@@ -27,6 +27,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -221,6 +222,14 @@ fun InputChip(isSelected: Boolean, label: String, onChipClick: () -> Unit, onClo
         trailingIcon = {
             IconButton(Icons.Filled.Close, "Close", onCloseClick, modifier = Modifier.size(InputChipDefaults.IconSize))
         }
+    )
+}
+
+@Composable
+fun SuggestionChip(label: String, onClick: () -> Unit) {
+    SuggestionChip(
+        label = { Text(label) },
+        onClick = onClick
     )
 }
 
