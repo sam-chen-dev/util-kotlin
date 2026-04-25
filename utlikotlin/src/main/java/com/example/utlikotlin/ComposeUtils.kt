@@ -8,10 +8,14 @@ import androidx.activity.compose.LocalActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
@@ -56,8 +60,13 @@ fun Text(
 }
 
 @Composable
-fun Icon(resId: Int, contentDescription: String, tint: Color = LocalContentColor.current) {
-    Icon(painterResource(resId), contentDescription, tint = tint)
+fun Icon(
+    resId: Int,
+    contentDescription: String,
+    tint: Color = LocalContentColor.current,
+    modifier: Modifier = Modifier
+) {
+    Icon(painterResource(resId), contentDescription, tint = tint, modifier = modifier)
 }
 
 @Composable
@@ -65,10 +74,11 @@ fun IconButton(
     resId: Int,
     contentDescription: String,
     onClick: () -> Unit,
-    tint: Color = LocalContentColor.current
+    tint: Color = LocalContentColor.current,
+    modifier: Modifier = Modifier
 ) {
     IconButton(onClick) {
-        Icon(resId, contentDescription, tint)
+        Icon(resId, contentDescription, tint, modifier)
     }
 }
 
@@ -77,10 +87,11 @@ fun IconButton(
     imageVector: ImageVector,
     contentDescription: String,
     onClick: () -> Unit,
-    tint: Color = LocalContentColor.current
+    tint: Color = LocalContentColor.current,
+    modifier: Modifier = Modifier
 ) {
     IconButton(onClick) {
-        Icon(imageVector, contentDescription, tint = tint)
+        Icon(imageVector, contentDescription, tint = tint, modifier = modifier)
     }
 }
 
@@ -184,29 +195,23 @@ fun GooglePayButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     )
 }
 
-/*@Composable
-fun SimpleButton(text: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
-    Button(onClick, modifier) {
-        Text(text)
-    }
+@Composable
+fun AssistChip(label: String, icon: ImageVector, contentDescription: String, onClick: () -> Unit) {
+    AssistChip(
+        label = { Text(label) },
+        leadingIcon = { Icon(icon, contentDescription, Modifier.size(AssistChipDefaults.IconSize)) },
+        onClick = onClick
+    )
 }
 
 @Composable
-fun PrimaryText(text: Any, fontSize: TextUnit, isBold: Boolean = false) {
-    val string = when (text) {
-        is String -> text
-
-        is Int -> stringResource(text)
-
-        else -> throw IllegalArgumentException()
-    }
-
-    Text(
-        text = string,
-        fontSize = fontSize,
-        fontWeight = if (isBold) FontWeight.Bold else FontWeight.Normal
+fun FilterChip(isSelected: Boolean, label: String, onClick: () -> Unit) {
+    FilterChip(
+        selected = isSelected,
+        label = { Text(label) },
+        onClick = onClick
     )
-}*/
+}
 
 @Composable
 fun SetSystemBarsStyle(isDarkStatusBar: Boolean, isDarkNavigationBar: Boolean) {
