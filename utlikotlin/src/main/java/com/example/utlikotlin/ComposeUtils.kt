@@ -9,6 +9,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
@@ -18,6 +20,8 @@ import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.InputChip
+import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedIconButton
@@ -205,6 +209,18 @@ fun FilterChip(isSelected: Boolean, label: String, onClick: () -> Unit) {
         selected = isSelected,
         label = { Text(label) },
         onClick = onClick
+    )
+}
+
+@Composable
+fun InputChip(isSelected: Boolean, label: String, onChipClick: () -> Unit, onCloseClick: () -> Unit) {
+    InputChip(
+        selected = isSelected,
+        label = { Text(label) },
+        onClick = onChipClick,
+        trailingIcon = {
+            IconButton(Icons.Filled.Close, "Close", onCloseClick, modifier = Modifier.size(InputChipDefaults.IconSize))
+        }
     )
 }
 
