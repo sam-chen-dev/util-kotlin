@@ -60,13 +60,8 @@ fun Text(
 }
 
 @Composable
-fun Icon(
-    resId: Int,
-    contentDescription: String,
-    tint: Color = LocalContentColor.current,
-    modifier: Modifier = Modifier
-) {
-    Icon(painterResource(resId), contentDescription, tint = tint, modifier = modifier)
+fun Icon(resId: Int, contentDescription: String, tint: Color = LocalContentColor.current) {
+    Icon(painterResource(resId), contentDescription, tint = tint)
 }
 
 @Composable
@@ -77,8 +72,8 @@ fun IconButton(
     tint: Color = LocalContentColor.current,
     modifier: Modifier = Modifier
 ) {
-    IconButton(onClick) {
-        Icon(resId, contentDescription, tint, modifier)
+    IconButton(onClick, modifier) {
+        Icon(resId, contentDescription, tint)
     }
 }
 
@@ -90,8 +85,8 @@ fun IconButton(
     tint: Color = LocalContentColor.current,
     modifier: Modifier = Modifier
 ) {
-    IconButton(onClick) {
-        Icon(imageVector, contentDescription, tint = tint, modifier = modifier)
+    IconButton(onClick, modifier) {
+        Icon(imageVector, contentDescription, tint = tint)
     }
 }
 
