@@ -8,6 +8,7 @@ import androidx.activity.compose.LocalActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -23,6 +24,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.InputChip
 import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.SnackbarHost
@@ -174,6 +176,16 @@ fun Image(resId: Int, contentDescription: String, contentScale: ContentScale, mo
 @Composable
 fun CoilImage(url: String, contentDescription: String, contentScale: ContentScale, modifier: Modifier = Modifier) {
     AsyncImage(url, contentDescription, contentScale = contentScale, modifier = modifier)
+}
+
+@Composable
+private fun RowScope.NavigationBarItem(isSelected: Boolean, icon: ImageVector, label: String, onClick: () -> Unit) {
+    NavigationBarItem(
+        selected = isSelected,
+        icon = { Icon(icon, label) },
+        label = { Text(label) },
+        onClick = onClick
+    )
 }
 
 @Composable
