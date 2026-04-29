@@ -179,7 +179,7 @@ fun CoilImage(url: String, contentDescription: String, contentScale: ContentScal
 }
 
 @Composable
-private fun RowScope.NavigationBarItem(isSelected: Boolean, icon: ImageVector, label: String, onClick: () -> Unit) {
+fun RowScope.NavigationBarItem(isSelected: Boolean, icon: ImageVector, label: String, onClick: () -> Unit) {
     NavigationBarItem(
         selected = isSelected,
         icon = { Icon(icon, label) },
