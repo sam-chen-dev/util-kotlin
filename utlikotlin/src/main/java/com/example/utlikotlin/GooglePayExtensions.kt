@@ -7,6 +7,7 @@ import com.google.android.gms.wallet.PaymentsClient
 import com.google.android.gms.wallet.button.ButtonConstants
 import com.google.android.gms.wallet.button.ButtonOptions
 import com.google.android.gms.wallet.button.PayButton
+import org.json.JSONObject
 
 fun PayButton.init() {
     val buttonOptions = ButtonOptions.newBuilder().run {
@@ -29,4 +30,15 @@ fun PaymentsClient.loadPaymentData(
     val paymentRequest = PaymentDataRequest.fromJson(paymentRequestJson.toString())
 
     return loadPaymentData(paymentRequest)
+}
+
+fun PaymentData.getToken(): String {
+    val paymentDataJson = JSONObject(this.toJson())
+    val paymentMethodDataJson = paymentDataJson.getJSONObject("paymentMethodData")
+    val tokenizationDataJson = paymentMethodDataJson.getJSONObject("tokenizationData")
+    val tokenJsonString = tokenizationDataJson.getString("token")
+    val tokenJson = JSONObject(tokenJsonString)
+    val tokenId = tokenJson.getString("id")
+
+    return tokenId
 }
