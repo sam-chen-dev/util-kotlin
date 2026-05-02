@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -25,6 +26,8 @@ import androidx.compose.material3.InputChip
 import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.SnackbarHost
@@ -185,6 +188,17 @@ fun RowScope.NavigationBarItem(isSelected: Boolean, icon: ImageVector, label: St
         icon = { Icon(icon, label) },
         label = { Text(label) },
         onClick = onClick
+    )
+}
+
+@Composable
+fun NavigationDrawerItem(icon: ImageVector, label: String, onClick: () -> Unit) {
+    NavigationDrawerItem(
+        selected = false,
+        icon = { Icon(icon, label) },
+        label = { Text(label) },
+        onClick = onClick,
+        modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
     )
 }
 
