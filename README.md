@@ -7,6 +7,7 @@ Main content: https://github.com/sam-chen-dev/util-kotlin/tree/main/utlikotlin/s
 
 This library has been published on Jitpack: https://jitpack.io/.
 
+To install:
 ```
 implementation("com.github.sam-chen-dev:util-kotlin:2.4.1")
 ```
