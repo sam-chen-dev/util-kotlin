@@ -6,3 +6,7 @@ Main content: https://github.com/sam-chen-dev/util-kotlin/tree/main/utlikotlin/s
 **API Level: 29+**
 
 This library has been published on Jitpack: https://jitpack.io/.
+
+```
+implementation("com.github.sam-chen-dev:util-kotlin:2.4.1")
+```
