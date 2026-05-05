@@ -20,6 +20,8 @@ import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.InputChip
@@ -168,6 +170,13 @@ fun OutlinedButton(resId: Int, onClick: () -> Unit) {
 fun TonalButton(resId: Int, onClick: () -> Unit) {
     FilledTonalButton(onClick) {
         Text(resId)
+    }
+}
+
+@Composable
+fun FloatingActionButton(icon: ImageVector, description: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    FloatingActionButton(onClick, modifier, FloatingActionButtonDefaults.largeShape) {
+        Icon(icon, description)
     }
 }
 
