@@ -24,6 +24,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.InputChip
 import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.LocalContentColor
@@ -142,6 +143,19 @@ fun TonalIconButton(
 ) {
     FilledTonalIconButton(onClick) {
         Icon(imageVector, contentDescription, tint = tint)
+    }
+}
+
+@Composable
+fun IconToggleButton(
+    isChecked: Boolean,
+    checkedIcon: ImageVector,
+    unCheckedIcon: ImageVector,
+    contentDescription: String,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    IconToggleButton(isChecked, onCheckedChange) {
+        Icon(if (isChecked) checkedIcon else unCheckedIcon, contentDescription)
     }
 }
 
