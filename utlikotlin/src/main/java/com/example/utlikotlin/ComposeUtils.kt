@@ -160,9 +160,16 @@ fun IconToggleButton(
 }
 
 @Composable
-fun Button(text: String, onClick: () -> Unit, isEnabled: Boolean = true) {
-    Button(onClick, enabled = isEnabled) {
+fun Button(text: String, onClick: () -> Unit, isEnabled: Boolean = true, modifier: Modifier = Modifier) {
+    Button(onClick, modifier, isEnabled) {
         Text(text)
+    }
+}
+
+@Composable
+fun Button(resId: Int, onClick: () -> Unit, isEnabled: Boolean = true, modifier: Modifier = Modifier) {
+    Button(onClick, modifier, isEnabled) {
+        Text(resId)
     }
 }
 
