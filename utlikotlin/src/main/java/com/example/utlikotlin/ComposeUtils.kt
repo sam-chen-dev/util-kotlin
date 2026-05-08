@@ -51,7 +51,6 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -87,12 +86,7 @@ fun AnnotatedString.Builder.appendLink(text: String, url: String) = withLink(Lin
 fun AnnotatedString.Builder.appendClickable(text: String, onCLick: () -> Unit) = withLink(
     LinkAnnotation.Clickable(
         tag = text,
-        styles = TextLinkStyles(
-            SpanStyle(
-                color = MaterialTheme.colorScheme.primary,
-                textDecoration = TextDecoration.None
-            )
-        ),
+        styles = TextLinkStyles(SpanStyle(MaterialTheme.colorScheme.primary)),
         linkInteractionListener = { onCLick() }
     )
 ) {
