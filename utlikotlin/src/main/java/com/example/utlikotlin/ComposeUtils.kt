@@ -82,7 +82,7 @@ fun Text(
 fun AnnotatedString.Builder.append(resId: Int) = append(stringResource(resId))
 
 @Composable
-fun AnnotatedString.Builder.append(resId: Int, url: String) = withLink(LinkAnnotation.Url(url)) {
+fun AnnotatedString.Builder.append(resId: Int, urlResId: Int) = withLink(LinkAnnotation.Url(stringResource(urlResId))) {
     append(stringResource(resId))
 }
 
