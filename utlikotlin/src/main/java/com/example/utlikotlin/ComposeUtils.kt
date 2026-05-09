@@ -78,19 +78,23 @@ fun Text(
     Text(text, color = color, fontSize = fontSize, modifier = modifier)
 }
 
-fun AnnotatedString.Builder.appendLink(text: String, url: String) = withLink(LinkAnnotation.Url(url)) {
-    append(text)
+@Composable
+fun AnnotatedString.Builder.append(resId: Int) = append(stringResource(resId))
+
+@Composable
+fun AnnotatedString.Builder.append(resId: Int, url: String) = withLink(LinkAnnotation.Url(url)) {
+    append(stringResource(resId))
 }
 
 @Composable
-fun AnnotatedString.Builder.appendClickable(text: String, onCLick: () -> Unit) = withLink(
+fun AnnotatedString.Builder.append(resId: Int, onCLick: () -> Unit) = withLink(
     LinkAnnotation.Clickable(
-        tag = text,
+        tag = stringResource(resId),
         styles = TextLinkStyles(SpanStyle(MaterialTheme.colorScheme.primary)),
         linkInteractionListener = { onCLick() }
     )
 ) {
-    append(text)
+    append(stringResource(resId))
 }
 
 @Composable
