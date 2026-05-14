@@ -1,7 +1,11 @@
 package com.example.utlikotlin
 
 import android.content.Context
-import androidx.datastore.preferences.core.*
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -20,21 +24,19 @@ object DataStore {
         }
     }
 
-    fun getStringFlow(context: Context, keyResId: Int, defaultValueResId: Int): Flow<String> {
+    fun getStringFlow(context: Context, keyResId: Int): Flow<String?> {
         val key = stringPreferencesKey(context.getString(keyResId))
-        val defaultValue = context.getString(defaultValueResId)
 
         return context.settings.data.map {
-            it[key] ?: defaultValue
+            it[key]
         }
     }
 
-    fun getString(context: Context, keyResId: Int, defaultValueResId: Int): String {
+    fun getString(context: Context, keyResId: Int): String? {
         val key = stringPreferencesKey(context.getString(keyResId))
-        val defaultValue = context.getString(defaultValueResId)
 
         return runBlocking {
-            context.settings.data.first()[key] ?: defaultValue
+            context.settings.data.first()[key]
         }
     }
 
@@ -47,21 +49,19 @@ object DataStore {
         }
     }
 
-    fun getBooleanFlow(context: Context, keyResId: Int, defaultValueResId: Int): Flow<Boolean> {
+    fun getBooleanFlow(context: Context, keyResId: Int): Flow<Boolean?> {
         val key = booleanPreferencesKey(context.getString(keyResId))
-        val defaultValue = context.resources.getBoolean(defaultValueResId)
 
         return context.settings.data.map {
-            it[key] ?: defaultValue
+            it[key]
         }
     }
 
-    fun getBoolean(context: Context, keyResId: Int, defaultValueResId: Int): Boolean {
+    fun getBoolean(context: Context, keyResId: Int): Boolean? {
         val key = booleanPreferencesKey(context.getString(keyResId))
-        val defaultValue = context.resources.getBoolean(defaultValueResId)
 
         return runBlocking {
-            context.settings.data.first()[key] ?: defaultValue
+            context.settings.data.first()[key]
         }
     }
 
@@ -74,21 +74,19 @@ object DataStore {
         }
     }
 
-    fun getIntFlow(context: Context, keyResId: Int, defaultValueResId: Int): Flow<Int> {
+    fun getIntFlow(context: Context, keyResId: Int): Flow<Int?> {
         val key = intPreferencesKey(context.getString(keyResId))
-        val defaultValue = context.resources.getInteger(defaultValueResId)
 
         return context.settings.data.map {
-            it[key] ?: defaultValue
+            it[key]
         }
     }
 
-    fun getInt(context: Context, keyResId: Int, defaultValueResId: Int): Int {
+    fun getInt(context: Context, keyResId: Int): Int? {
         val key = intPreferencesKey(context.getString(keyResId))
-        val defaultValue = context.resources.getInteger(defaultValueResId)
 
         return runBlocking {
-            context.settings.data.first()[key] ?: defaultValue
+            context.settings.data.first()[key]
         }
     }
 
@@ -110,21 +108,19 @@ object DataStore {
         }
     }
 
-    fun getLongFlow(context: Context, keyResId: Int, defaultValueResId: Int): Flow<Long> {
+    fun getLongFlow(context: Context, keyResId: Int): Flow<Long?> {
         val key = longPreferencesKey(context.getString(keyResId))
-        val defaultValue = context.resources.getInteger(defaultValueResId).toLong()
 
         return context.settings.data.map {
-            it[key] ?: defaultValue
+            it[key]
         }
     }
 
-    fun getLong(context: Context, keyResId: Int, defaultValueResId: Int): Long {
+    fun getLong(context: Context, keyResId: Int): Long? {
         val key = longPreferencesKey(context.getString(keyResId))
-        val defaultValue = context.resources.getInteger(defaultValueResId).toLong()
 
         return runBlocking {
-            context.settings.data.first()[key] ?: defaultValue
+            context.settings.data.first()[key]
         }
     }
 }
