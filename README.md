@@ -9,5 +9,5 @@ This library has been published on Jitpack: https://jitpack.io/.
 
 To install:
 ```
-implementation("com.github.sam-chen-dev:util-kotlin:2.4.1")
+implementation("com.github.sam-chen-dev:util-kotlin:[RELEASE_VERSION]")
 ```
