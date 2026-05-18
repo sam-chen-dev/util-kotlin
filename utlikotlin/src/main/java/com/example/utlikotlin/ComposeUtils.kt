@@ -52,6 +52,7 @@ import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.withLink
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -84,6 +85,11 @@ fun AnnotatedString.Builder.append(resId: Int) = append(stringResource(resId))
 @Composable
 fun AnnotatedString.Builder.append(resId: Int, urlResId: Int) = withLink(LinkAnnotation.Url(stringResource(urlResId))) {
     append(stringResource(resId))
+}
+
+@Composable
+fun AnnotatedString.Builder.append(text: String, color: Color) = withStyle(SpanStyle(color)) {
+    append(text)
 }
 
 @Composable
