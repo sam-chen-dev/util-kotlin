@@ -43,6 +43,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -233,8 +234,20 @@ fun FloatingActionButton(icon: ImageVector, description: String, onClick: () -> 
 }
 
 @Composable
-fun Image(resId: Int, contentDescription: String, contentScale: ContentScale, modifier: Modifier = Modifier) {
-    Image(painterResource(resId), contentDescription, contentScale = contentScale, modifier = modifier)
+fun Image(
+    resId: Int,
+    contentDescription: String,
+    contentScale: ContentScale,
+    modifier: Modifier = Modifier,
+    colorFilter: ColorFilter? = null
+) {
+    Image(
+        painterResource(resId),
+        contentDescription,
+        contentScale = contentScale,
+        modifier = modifier,
+        colorFilter = colorFilter
+    )
 }
 
 @Composable
