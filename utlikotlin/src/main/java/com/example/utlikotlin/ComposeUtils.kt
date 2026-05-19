@@ -28,7 +28,6 @@ import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.InputChip
 import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
@@ -48,12 +47,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.LinkAnnotation
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextLinkStyles
-import androidx.compose.ui.text.withLink
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -78,30 +71,6 @@ fun Text(
     modifier: Modifier = Modifier
 ) {
     Text(text, color = color, fontSize = fontSize, modifier = modifier)
-}
-
-@Composable
-fun AnnotatedString.Builder.append(resId: Int) = append(stringResource(resId))
-
-@Composable
-fun AnnotatedString.Builder.append(resId: Int, urlResId: Int) = withLink(LinkAnnotation.Url(stringResource(urlResId))) {
-    append(stringResource(resId))
-}
-
-@Composable
-fun AnnotatedString.Builder.append(text: String, color: Color) = withStyle(SpanStyle(color)) {
-    append(text)
-}
-
-@Composable
-fun AnnotatedString.Builder.append(resId: Int, onCLick: () -> Unit) = withLink(
-    LinkAnnotation.Clickable(
-        tag = stringResource(resId),
-        styles = TextLinkStyles(SpanStyle(MaterialTheme.colorScheme.primary)),
-        linkInteractionListener = { onCLick() }
-    )
-) {
-    append(stringResource(resId))
 }
 
 @Composable
