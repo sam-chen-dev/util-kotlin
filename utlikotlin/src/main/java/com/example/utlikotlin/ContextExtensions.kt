@@ -4,6 +4,9 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
+import android.util.Log
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 fun Context.getConnectivityManager() = getSystemService(ConnectivityManager::class.java)
 
@@ -15,4 +18,13 @@ fun Context.closeNotificationPanel() {
     val intent = Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)
 
     sendBroadcast(intent)
+}
+
+suspend fun Context.readFileFromAssets(path: String): String? = withContext(Dispatchers.IO) {
+    try {
+        assets.open(path).bufferedReader().use { it.readText() }
+    } catch (e: Exception) {
+        Log.e("readFileFromAssets()", "Error: ${e.message.toString()}")
+        null
+    }
 }
