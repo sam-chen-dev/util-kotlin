@@ -3,6 +3,7 @@ package com.example.utlikotlin
 import android.content.Context
 import android.net.NetworkCapabilities
 import android.provider.Settings
+import com.example.utlikotlin.extensions.context.getConnectivityManager
 
 object ConnectivityHelper {
     fun isWifiOn(context: Context) = with(context.getConnectivityManager()) {

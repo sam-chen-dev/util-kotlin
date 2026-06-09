@@ -1,4 +1,4 @@
-package com.example.utlikotlin
+package com.example.utlikotlin.extensions.context
 
 import android.app.NotificationManager
 import android.content.Context
