@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat
 
 @RequiresApi(Build.VERSION_CODES.S)
 fun Context.isBluetoothPermissionGranted(): Boolean {
-    val result = ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN)
+    val result = ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT)
 
     return result == PackageManager.PERMISSION_GRANTED
 }
