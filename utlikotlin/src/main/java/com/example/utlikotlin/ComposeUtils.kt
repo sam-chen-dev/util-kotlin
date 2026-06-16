@@ -137,6 +137,18 @@ fun OutlinedIconButton(
 
 @Composable
 fun TonalIconButton(
+    resId: Int,
+    contentDescription: String,
+    onClick: () -> Unit,
+    tint: Color = LocalContentColor.current
+) {
+    FilledTonalIconButton(onClick) {
+        Icon(resId, contentDescription, tint = tint)
+    }
+}
+
+@Composable
+fun TonalIconButton(
     imageVector: ImageVector,
     contentDescription: String,
     onClick: () -> Unit,
