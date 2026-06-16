@@ -12,115 +12,107 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 
-object DataStore {
+class DataStore(context: Context) {
+    private val applicationContext = context.applicationContext
     private val Context.settings by preferencesDataStore("settings")
 
     /*String*/
-    suspend fun saveString(context: Context, keyResId: Int, value: String) {
-        val key = stringPreferencesKey(context.getString(keyResId))
+    suspend fun saveString(key: String, value: String) {
+        val key = stringPreferencesKey(key)
 
-        context.settings.edit {
+        applicationContext.settings.edit {
             it[key] = value
         }
     }
 
-    fun getStringFlow(context: Context, keyResId: Int): Flow<String?> {
-        val key = stringPreferencesKey(context.getString(keyResId))
+    fun getStringFlow(key: String): Flow<String?> {
+        val key = stringPreferencesKey(key)
 
-        return context.settings.data.map {
+        return applicationContext.settings.data.map {
             it[key]
         }
     }
 
-    fun getString(context: Context, keyResId: Int): String? {
-        val key = stringPreferencesKey(context.getString(keyResId))
+    fun getString(key: String): String? {
+        val key = stringPreferencesKey(key)
 
         return runBlocking {
-            context.settings.data.first()[key]
+            applicationContext.settings.data.first()[key]
         }
     }
 
     /*Boolean*/
-    suspend fun saveBoolean(context: Context, keyResId: Int, value: Boolean) {
-        val key = booleanPreferencesKey(context.getString(keyResId))
+    suspend fun saveBoolean(key: String, value: Boolean) {
+        val key = booleanPreferencesKey(key)
 
-        context.settings.edit {
+        applicationContext.settings.edit {
             it[key] = value
         }
     }
 
-    fun getBooleanFlow(context: Context, keyResId: Int): Flow<Boolean?> {
-        val key = booleanPreferencesKey(context.getString(keyResId))
+    fun getBooleanFlow(key: String): Flow<Boolean?> {
+        val key = booleanPreferencesKey(key)
 
-        return context.settings.data.map {
+        return applicationContext.settings.data.map {
             it[key]
         }
     }
 
-    fun getBoolean(context: Context, keyResId: Int): Boolean? {
-        val key = booleanPreferencesKey(context.getString(keyResId))
+    fun getBoolean(key: String): Boolean? {
+        val key = booleanPreferencesKey(key)
 
         return runBlocking {
-            context.settings.data.first()[key]
+            applicationContext.settings.data.first()[key]
         }
     }
 
     /*Int*/
-    suspend fun saveInt(context: Context, keyResId: Int, value: Int) {
-        val key = intPreferencesKey(context.getString(keyResId))
+    suspend fun saveInt(key: String, value: Int) {
+        val key = intPreferencesKey(key)
 
-        context.settings.edit {
+        applicationContext.settings.edit {
             it[key] = value
         }
     }
 
-    fun getIntFlow(context: Context, keyResId: Int): Flow<Int?> {
-        val key = intPreferencesKey(context.getString(keyResId))
+    fun getIntFlow(key: String): Flow<Int?> {
+        val key = intPreferencesKey(key)
 
-        return context.settings.data.map {
+        return applicationContext.settings.data.map {
             it[key]
         }
     }
 
-    fun getInt(context: Context, keyResId: Int): Int? {
-        val key = intPreferencesKey(context.getString(keyResId))
+    fun getInt(key: String): Int? {
+        val key = intPreferencesKey(key)
 
         return runBlocking {
-            context.settings.data.first()[key]
+            applicationContext.settings.data.first()[key]
         }
     }
 
     /*Long*/
-    suspend fun saveLong(context: Context, keyResId: Int, value: Long) {
-        val key = longPreferencesKey(context.getString(keyResId))
+    suspend fun saveLong(key: String, value: Long) {
+        val key = longPreferencesKey(key)
 
-        context.settings.edit {
+        applicationContext.settings.edit {
             it[key] = value
         }
     }
 
-    suspend fun saveLong(context: Context, keyResId: Int, valueResId: Int) {
-        val key = longPreferencesKey(context.getString(keyResId))
-        val value = context.resources.getInteger(valueResId).toLong()
+    fun getLongFlow(key: String): Flow<Long?> {
+        val key = longPreferencesKey(key)
 
-        context.settings.edit {
-            it[key] = value
-        }
-    }
-
-    fun getLongFlow(context: Context, keyResId: Int): Flow<Long?> {
-        val key = longPreferencesKey(context.getString(keyResId))
-
-        return context.settings.data.map {
+        return applicationContext.settings.data.map {
             it[key]
         }
     }
 
-    fun getLong(context: Context, keyResId: Int): Long? {
-        val key = longPreferencesKey(context.getString(keyResId))
+    fun getLong(key: String): Long? {
+        val key = longPreferencesKey(key)
 
         return runBlocking {
-            context.settings.data.first()[key]
+            applicationContext.settings.data.first()[key]
         }
     }
 }
