@@ -11,9 +11,9 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class FileManager(context: Context) {
+class ExternalFileManager(context: Context) {
     companion object {
-        private const val TAG = "FileManager"
+        private const val TAG = "ExternalFileManager"
     }
 
     private val applicationContext = context.applicationContext
