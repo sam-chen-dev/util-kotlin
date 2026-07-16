@@ -20,11 +20,13 @@ fun Context.closeNotificationPanel() {
     sendBroadcast(intent)
 }
 
-suspend fun Context.readFileFromAssets(path: String): String? = withContext(Dispatchers.IO) {
+suspend fun Context.readFileFromAssets(path: String): Result<String> = withContext(Dispatchers.IO) {
     try {
-        assets.open(path).bufferedReader().use { it.readText() }
+        val text = assets.open(path).bufferedReader().use { it.readText() }
+
+        Result.success(text)
     } catch (e: Exception) {
-        Log.e("readFileFromAssets()", "Error: ${e.message.toString()}")
-        null
+        Log.e("readFileFromAssets()", "readFileFromAssets(path: String) failed", e)
+        Result.failure(e)
     }
 }
