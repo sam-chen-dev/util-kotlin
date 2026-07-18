@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
@@ -295,13 +293,19 @@ fun FilterChip(isSelected: Boolean, label: String, onClick: () -> Unit) {
 }
 
 @Composable
-fun InputChip(isSelected: Boolean, label: String, onChipClick: () -> Unit, onCloseClick: () -> Unit) {
+fun InputChip(
+    isSelected: Boolean,
+    label: String,
+    closeIcon: Int,
+    onChipClick: () -> Unit,
+    onCloseClick: () -> Unit
+) {
     InputChip(
         selected = isSelected,
         label = { Text(label) },
         onClick = onChipClick,
         trailingIcon = {
-            IconButton(Icons.Filled.Close, "Close", onCloseClick, modifier = Modifier.size(InputChipDefaults.IconSize))
+            IconButton(closeIcon, "Close", onCloseClick, modifier = Modifier.size(InputChipDefaults.IconSize))
         }
     )
 }
