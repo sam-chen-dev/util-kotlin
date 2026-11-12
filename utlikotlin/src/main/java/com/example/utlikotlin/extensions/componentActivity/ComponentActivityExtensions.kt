@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 
-private fun ComponentActivity.enableEdgeToEdge(isDarkStatusBar: Boolean, isDarkNavigationBar: Boolean) {
+fun ComponentActivity.enableEdgeToEdge(isDarkStatusBar: Boolean, isDarkNavigationBar: Boolean) {
     val lightSystemBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
     val darkSystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
 
