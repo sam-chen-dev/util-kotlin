@@ -43,9 +43,9 @@ fun <T> Flow<T>.collectOnResumed(lifecycleOwner: LifecycleOwner, action: suspend
 }
 
 fun <R> Flow<R>.toStateFlow(coroutineScope: CoroutineScope, initialValue: R): StateFlow<R> {
-    return stateIn(coroutineScope, SharingStarted.Lazily, initialValue)
+    return stateIn(coroutineScope, SharingStarted.WhileSubscribed(5000), initialValue)
 }
 
 fun <R> Flow<R>.toSharedFlow(coroutineScope: CoroutineScope): SharedFlow<R> {
-    return shareIn(coroutineScope, SharingStarted.Lazily)
+    return shareIn(coroutineScope, SharingStarted.WhileSubscribed(5000))
 }
