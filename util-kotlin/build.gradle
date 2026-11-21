@@ -101,6 +101,7 @@ afterEvaluate {
     }
 }
 
+/*
 tasks.withType(GenerateModuleMetadata).configureEach {
     enabled = false
-}
+}*/
