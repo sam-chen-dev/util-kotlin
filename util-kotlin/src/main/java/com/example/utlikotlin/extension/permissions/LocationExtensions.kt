@@ -1,4 +1,4 @@
-package com.example.utlikotlin.extensions.permissions
+package com.example.utlikotlin.extension.permissions
 
 import android.Manifest
 import android.content.Context

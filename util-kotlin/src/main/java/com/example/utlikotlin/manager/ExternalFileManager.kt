@@ -1,4 +1,4 @@
-package com.example.utlikotlin.mamagers
+package com.example.utlikotlin.manager
 
 import android.content.ContentUris
 import android.content.ContentValues

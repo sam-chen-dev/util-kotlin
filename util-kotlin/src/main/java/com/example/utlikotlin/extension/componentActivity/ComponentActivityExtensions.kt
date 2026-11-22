@@ -1,4 +1,4 @@
-package com.example.utlikotlin.extensions.componentActivity
+package com.example.utlikotlin.extension.componentActivity
 
 import android.graphics.Color
 import androidx.activity.ComponentActivity

@@ -1,4 +1,4 @@
-package com.example.utlikotlin.mamagers
+package com.example.utlikotlin.manager
 
 import android.content.Context
 import android.util.Log

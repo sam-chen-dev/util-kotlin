@@ -1,4 +1,4 @@
-package com.example.utlikotlin.extensions.annotatedString
+package com.example.utlikotlin.extension.annotatedString
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString

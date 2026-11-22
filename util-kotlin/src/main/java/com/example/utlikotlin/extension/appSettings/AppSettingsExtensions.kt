@@ -1,4 +1,4 @@
-package com.example.utlikotlin.extensions.appSettings
+package com.example.utlikotlin.extension.appSettings
 
 import android.content.Context
 import android.content.Intent
